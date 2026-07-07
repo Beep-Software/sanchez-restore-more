@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo+Narrow:wght@400;500;700&display=swap');
+
+:root {
+  --paper: #f5ecdc;
+  --paper-deep: #e8d4ba;
+  --ink: #1a1817;
+  --ink-soft: #473c32;
+  --line-strong: #2b2521;
+  --line-subtle: #7d6e61;
+  --brand: #c0492f;
+  --brand-dark: #163b57;
+  --panel-bg: #f7efdf;
+  --hero-bg: #f0ddc2;
+  --stripe-a: #efdfc8;
+  --stripe-b: #e4cfb3;
+
+  --display: 'Archivo Narrow', 'Trebuchet MS', sans-serif;
+  --heading: 'Alfa Slab One', serif;
+  --body: 'Archivo Narrow', 'Segoe UI', sans-serif;
+
+  font-family: var(--body);
+  color: var(--ink);
+  background: var(--paper);
+  font-size: 18px;
+  line-height: 1.5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(192, 73, 47, 0.16), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(22, 59, 87, 0.2), transparent 45%),
+    linear-gradient(180deg, var(--paper), var(--paper-deep));
+}
+
+#root {
+  min-height: 100vh;
+  padding: 1px 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--heading);
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+h1 {
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  line-height: 1.04;
+}
+
+h2 {
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  line-height: 1.15;
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+p {
+  margin: 0;
+}
+
+@media (max-width: 980px) {
+  :root {
+    font-size: 16px;
+  }
+}

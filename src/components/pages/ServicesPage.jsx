@@ -1,9 +1,8 @@
-import { PaintBrushIcon, SparklesIcon, WrenchScrewdriverIcon } from '../Icons'
+import { PaintBrushIcon, SparklesIcon } from '../Icons'
 
 const SERVICE_ICONS = {
   paint: PaintBrushIcon,
   detail: SparklesIcon,
-  maintenance: WrenchScrewdriverIcon,
 }
 
 export default function ServicesPage({ navigate }) {
@@ -36,20 +35,6 @@ export default function ServicesPage({ navigate }) {
         'Clear coat restoration',
       ],
     },
-    {
-      icon: 'maintenance',
-      title: 'Routine Maintenance',
-      description:
-        'Stay ahead of issues with our practical maintenance packages. We keep your car dependable, safe, and road-ready through the seasons — so small problems never become expensive ones.',
-      items: [
-        'Oil and filter changes',
-        'Brake inspection and replacement',
-        'Tire rotation and balancing',
-        'Fluid top-offs and flushes',
-        'Multi-point safety inspection',
-        'Battery testing and replacement',
-      ],
-    },
   ]
 
   return (
@@ -58,7 +43,7 @@ export default function ServicesPage({ navigate }) {
         <span className="section-eyebrow">Our services</span>
         <h1>Everything Your Vehicle Needs</h1>
         <p>
-          From bumper-to-bumper restoration to everyday maintenance, our team
+          From complete restoration to premium detailing, our team
           delivers honest work at fair prices.
         </p>
       </section>

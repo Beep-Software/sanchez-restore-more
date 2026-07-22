@@ -1,5 +1,5 @@
-import { PaintBrushIcon, SparklesIcon, WrenchScrewdriverIcon } from '../Icons'
-import Carousel from '../Carousel'
+import { PaintBrushIcon, SparklesIcon } from '../Icons'
+import HomePortfolioShowcase from '../HomePortfolioShowcase'
 import { portfolioProjects } from '../../data/portfolio'
 
 export default function HomePage({ navigate }) {
@@ -11,7 +11,7 @@ export default function HomePage({ navigate }) {
           <span className="section-eyebrow">Locally owned &amp; community trusted</span>
           <h1>Experienced Craftsmanship. Modern Automotive Care.</h1>
           <p className="hero-lead">
-            Paint and body restoration, premium detailing, and reliable maintenance
+            Paint and body restoration with premium detailing
             for drivers who take pride in every mile.
           </p>
           <div className="hero-actions">
@@ -63,14 +63,6 @@ export default function HomePage({ navigate }) {
               <p>
                 Collision repair, color matching, dent correction, and quality
                 refinishing to restore your vehicle to factory-like condition.
-              </p>
-            </div>
-            <div className="service-card">
-              <WrenchScrewdriverIcon size={36} className="card-icon" />
-              <h3>Maintenance</h3>
-              <p>
-                Practical service packages for routine automotive care to keep
-                your car dependable, clean, and road-ready year round.
               </p>
             </div>
           </div>
@@ -132,7 +124,7 @@ export default function HomePage({ navigate }) {
         </div>
       </section> */}
 
-      {/* Portfolio carousel */}
+      {/* Portfolio spotlight */}
       <section className="portfolio-preview">
         <div className="portfolio-preview-inner">
           <div className="section-header">
@@ -140,7 +132,7 @@ export default function HomePage({ navigate }) {
             <h2>Completed Work</h2>
             <p>Every project showcases our attention to detail and commitment to excellence.</p>
           </div>
-          <Carousel items={portfolioProjects} height="420px" />
+          <HomePortfolioShowcase items={portfolioProjects} />
           <div style={{ textAlign: 'center', marginTop: '32px' }}>
             <button className="btn btn-outline" onClick={() => navigate('portfolio')}>
               View All Projects

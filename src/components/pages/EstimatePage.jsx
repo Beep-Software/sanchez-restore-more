@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { CheckCircleIcon } from '../Icons'
+import { EmailService } from '../../services/email'
 
 const ESTIMATE_EMAIL = 'sanchezrestoremore@gmail.com'
 
@@ -43,7 +44,12 @@ export default function EstimatePage() {
       .filter((l) => l !== null)
       .join('\n')
 
-    window.location.href = `mailto:${ESTIMATE_EMAIL}?subject=${subject}&body=${encodeURIComponent(lines)}`
+    const emailService = new EmailService()
+    emailService.createEmail({
+      to: ESTIMATE_EMAIL,
+      subject,
+      body: lines,
+    })
     setSubmitted(true)
   }
 

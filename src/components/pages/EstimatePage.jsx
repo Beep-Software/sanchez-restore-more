@@ -20,6 +20,7 @@ export default function EstimatePage() {
   const [form, setForm] = useState(INITIAL_FORM)
   const [submitted, setSubmitted] = useState(false)
   const [submissionError, setSubmissionError] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -28,7 +29,10 @@ export default function EstimatePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (isSubmitting) return
+
     setSubmissionError(false)
+    setIsSubmitting(true)
 
     const subject = encodeURIComponent(
       `Estimate Request — ${form.name}${form.year || form.make ? ` (${[form.year, form.make, form.model].filter(Boolean).join(' ')})` : ''}`
@@ -57,6 +61,8 @@ export default function EstimatePage() {
       setSubmitted(true)
     } catch {
       setSubmissionError(true)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -137,7 +143,8 @@ export default function EstimatePage() {
             <h2>Your Information</h2>
             <p>Fill in the details below and we'll prepare a personalised estimate for you.</p>
 
-            <form onSubmit={handleSubmit} noValidate>
+            <form onSubmit={handleSubmit} noValidate aria-busy={isSubmitting}>
+              <fieldset className="form-fieldset" disabled={isSubmitting}>
               {/* Contact */}
               <div className="form-row">
                 <div className="form-group">
@@ -250,12 +257,15 @@ export default function EstimatePage() {
               </div>
 
               <button type="submit" className="btn btn-primary form-submit">
-                Send Estimate Request
+                {isSubmitting ? 'Sending Request...' : 'Send Estimate Request'}
               </button>
 
               <p className="form-note">
-                This will open your default email app with your details pre-filled.
+                {isSubmitting
+                  ? 'Submitting your estimate request. Please wait for confirmation.'
+                  : 'Your estimate request will be sent directly to our team.'}
               </p>
+              </fieldset>
             </form>
           </div>
 

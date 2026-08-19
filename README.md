@@ -1,6 +1,6 @@
 # Sanchez Restore and More
 
-Professional web presence for an automotive business focused on paint and body work, detailing, and maintenance services.
+Professional web presence for an automotive business focused on paint correction, detailing, and maintenance services.
 
 ## Overview
 
@@ -74,7 +74,7 @@ npm run preview
 
 - Company: Sanchez Restore and More
 - Industry: Automotive restoration and maintenance
-- Services: Paint and body, detailing, and general maintenance
+- Services: Paint correction, detailing, and general maintenance
 - Visual style: Retro, clean, and professional
 
 ## Next Improvements

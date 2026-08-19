@@ -4,7 +4,7 @@ import axios from "axios"
 export class EmailService {
     constructor() {
         this.instance = axios.create({
-            baseURL: 'http://localhost:3000/email'
+            baseURL: 'http://localhost:3000/api/email'
         })
     }
 
@@ -19,6 +19,7 @@ export class EmailService {
             return response.data
         } catch (error) {
             console.error(error)
+            throw error
         }
     }
 }

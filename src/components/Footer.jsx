@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="footer-brand">
           <h3 className="footer-brand-name"><TruckWrenchIcon size={18} className="footer-brand-icon" /> Sanchez Restore &amp; More</h3>
           <p>
-            Locally owned automotive care. Paint, body, detailing, and
+            Locally owned automotive care. Paint correction, detailing, and
             maintenance — done with pride.
           </p>
         </div>

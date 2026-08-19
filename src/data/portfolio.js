@@ -5,11 +5,11 @@
 export const portfolioProjects = [
   {
     id: 1,
-    title: '2015 Honda Civic — Full Paint Restoration',
-    category: 'Paint & Body',
+    title: '2015 Honda Civic — Paint Correction',
+    category: 'Paint Correction',
     image: 'https://images.unsplash.com/photo-1507950547-4daa4681d4b6?w=800&q=80&crop=entropy&cs=tinysrgb',
     description:
-      'Complete exterior repaint after collision damage. Factory-matched Honda Pearl Blue with precision bodywork and flawless finish.',
+      'Multi-stage paint correction that removed oxidation and surface defects, restoring clarity and depth to the Honda Pearl Blue finish.',
   },
   {
     id: 2,
@@ -29,11 +29,11 @@ export const portfolioProjects = [
   },
   {
     id: 4,
-    title: '2017 BMW 3 Series — Dent Removal & Polish',
-    category: 'Paint & Body',
+    title: '2017 BMW 3 Series — Paint Correction',
+    category: 'Paint Correction',
     image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80&crop=entropy&cs=tinysrgb',
     description:
-      'Professional dent removal and paint correction. Machine polish and ceramic trim coating for a showroom-quality finish.',
+      'Professional paint correction and machine polishing that refined the finish and added ceramic trim coating for a showroom-quality result.',
   },
   {
     id: 5,
@@ -53,4 +53,4 @@ export const portfolioProjects = [
   },
 ]
 
-export const portfolioCategories = ['All', 'Paint & Body', 'Detailing', 'Maintenance']
+export const portfolioCategories = ['All', 'Paint Correction', 'Detailing', 'Maintenance']

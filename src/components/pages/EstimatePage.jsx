@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { CheckCircleIcon } from '../Icons'
+import { CheckCircleIcon, ErrorCircleIcon } from '../Icons'
 import { EmailService } from '../../services/email'
 
-const ESTIMATE_EMAIL = 'sanchezrestoremore@gmail.com'
+// const ESTIMATE_EMAIL = 'sanchezrestoremore@gmail.com'
+const ESTIMATE_EMAIL = 'bowen61496@gmail.com'
 
 const INITIAL_FORM = {
   name: '',
@@ -18,14 +19,16 @@ const INITIAL_FORM = {
 export default function EstimatePage() {
   const [form, setForm] = useState(INITIAL_FORM)
   const [submitted, setSubmitted] = useState(false)
+  const [submissionError, setSubmissionError] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setSubmissionError(false)
 
     const subject = encodeURIComponent(
       `Estimate Request — ${form.name}${form.year || form.make ? ` (${[form.year, form.make, form.model].filter(Boolean).join(' ')})` : ''}`
@@ -45,12 +48,16 @@ export default function EstimatePage() {
       .join('\n')
 
     const emailService = new EmailService()
-    emailService.createEmail({
-      to: ESTIMATE_EMAIL,
-      subject,
-      body: lines,
-    })
-    setSubmitted(true)
+    try {
+      await emailService.createEmail({
+        to: ESTIMATE_EMAIL,
+        subject,
+        body: lines,
+      })
+      setSubmitted(true)
+    } catch {
+      setSubmissionError(true)
+    }
   }
 
   if (submitted) {
@@ -66,11 +73,47 @@ export default function EstimatePage() {
             <div className="estimate-form-card">
               <div className="form-success">
                 <CheckCircleIcon size={52} className="success-icon" />
-                <h3>Your email client opened!</h3>
+                <h3>Request Submitted!</h3>
                 <p>
-                  Review your email and hit send — we typically respond within
-                  one business day.
+                  Thank you, your estimate is being processed. We typically respond within one business day.
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    )
+  }
+
+  if (submissionError) {
+    return (
+      <main>
+        <section className="page-hero">
+          <span className="section-eyebrow">Estimate request</span>
+          <h1>Request an Estimate</h1>
+          <p>Tell us about your vehicle and we'll get back to you promptly.</p>
+        </section>
+        <div className="estimate-layout">
+          <div className="estimate-layout-inner">
+            <div className="estimate-form-card">
+              <div className="form-error" role="alert">
+                <ErrorCircleIcon size={52} className="error-icon" />
+                <h3>We Couldn't Send Your Request</h3>
+                <p>
+                  Something went wrong while sending your estimate request. Please try again or contact us directly.
+                </p>
+                <div className="form-error-actions">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => setSubmissionError(false)}
+                  >
+                    Try Again
+                  </button>
+                  <a className="btn btn-outline" href={`mailto:${ESTIMATE_EMAIL}`}>
+                    Email Us Directly
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -188,10 +231,9 @@ export default function EstimatePage() {
                   onChange={handleChange}
                 >
                   <option value="">Select a service…</option>
-                  <option value="Paint &amp; Body Restoration">Paint &amp; Body Restoration</option>
+                  <option value="Paint Correction">Paint Correction</option>
                   <option value="Detailing">Detailing</option>
                   <option value="Routine Maintenance">Routine Maintenance</option>
-                  <option value="Collision Repair">Collision Repair</option>
                   <option value="Other / Not Sure">Other / Not Sure</option>
                 </select>
               </div>

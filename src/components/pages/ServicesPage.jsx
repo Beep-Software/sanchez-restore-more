@@ -23,16 +23,16 @@ export default function ServicesPage({ navigate }) {
     },
     {
       icon: 'paint',
-      title: 'Paint & Body Restoration',
+      title: 'Paint Correction',
       description:
-        'Whether it\'s collision damage, rust, or just years of wear, we restore your vehicle\'s body to its original integrity and appearance. Our color-matching technology ensures a seamless, factory-quality finish.',
+        'We refine your vehicle\'s finish by reducing swirls, scratches, oxidation, and other surface imperfections. Our paint correction process brings back clarity, depth, and a polished, factory-quality appearance.',
       items: [
-        'Collision and impact repair',
-        'Precision color matching',
-        'Dent and ding correction',
-        'Rust treatment and prevention',
-        'Full respray and panel refinishing',
-        'Clear coat restoration',
+        'Paint inspection and assessment',
+        'Multi-stage machine polishing',
+        'Swirl mark and scratch reduction',
+        'Oxidation and haze removal',
+        'Clear coat refinement',
+        'Paint protection preparation',
       ],
     },
   ]
@@ -43,7 +43,7 @@ export default function ServicesPage({ navigate }) {
         <span className="section-eyebrow">Our services</span>
         <h1>Everything Your Vehicle Needs</h1>
         <p>
-          From complete restoration to premium detailing, our team
+          From paint correction to premium detailing, our team
           delivers honest work at fair prices.
         </p>
       </section>

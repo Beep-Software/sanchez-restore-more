@@ -11,7 +11,7 @@ export default function HomePage({ navigate }) {
           <span className="section-eyebrow">Locally owned &amp; community trusted</span>
           <h1>Experienced Craftsmanship. Modern Automotive Care.</h1>
           <p className="hero-lead">
-            Paint and body restoration with premium detailing
+            Professional paint correction with premium detailing
             for drivers who take pride in every mile.
           </p>
           <div className="hero-actions">
@@ -46,7 +46,7 @@ export default function HomePage({ navigate }) {
           <div className="section-header">
             <span className="section-eyebrow">What we do</span>
             <h2>Every Service, Done Right</h2>
-            <p>From collision repair to showroom-grade detailing, we handle it all with care and precision.</p>
+            <p>From paint correction to showroom-grade detailing, we handle it all with care and precision.</p>
           </div>
           <div className="service-cards">
             <div className="service-card">
@@ -59,10 +59,10 @@ export default function HomePage({ navigate }) {
             </div>
             <div className="service-card">
               <PaintBrushIcon size={36} className="card-icon" />
-              <h3>Paint &amp; Body</h3>
+              <h3>Paint Correction</h3>
               <p>
-                Collision repair, color matching, dent correction, and quality
-                refinishing to restore your vehicle to factory-like condition.
+                Careful machine polishing and defect removal to refine your
+                vehicle&apos;s finish and bring back a showroom-quality gloss.
               </p>
             </div>
           </div>
@@ -88,10 +88,10 @@ export default function HomePage({ navigate }) {
             </div>
             <div className="step">
               <p className="step-num">Step 02</p>
-              <h3>Restore</h3>
+              <h3>Correct</h3>
               <p>
-                Skilled technicians complete paint, body, detailing, and service
-                work with meticulous attention to detail.
+                Skilled technicians complete paint correction, detailing, and
+                maintenance work with meticulous attention to detail.
               </p>
             </div>
             <div className="step">

@@ -783,6 +783,36 @@
   margin: 0 auto;
 }
 
+.form-error {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.error-icon {
+  display: block;
+  margin: 0 auto 16px;
+  color: #d64545;
+}
+
+.form-error h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.form-error p {
+  color: var(--text-secondary);
+  max-width: 42ch;
+  margin: 0 auto;
+}
+
+.form-error-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
 /* ── Carousel ───────────────────────────────────────── */
 .carousel {
   position: relative;

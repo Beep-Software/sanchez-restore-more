@@ -4,7 +4,7 @@ import axios from "axios"
 export class EmailService {
     constructor() {
         this.instance = axios.create({
-            baseURL: 'https://api.beepsoftware.com/api/email'
+            baseURL: 'https://api.beepsoftware.com/email'
         })
     }
 

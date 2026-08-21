@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { CheckCircleIcon, ErrorCircleIcon } from '../Icons'
 import { EmailService } from '../../services/email'
 
-// const ESTIMATE_EMAIL = 'sanchezrestoremore@gmail.com'
-const ESTIMATE_EMAIL = 'bowen61496@gmail.com'
+const ESTIMATE_EMAIL = 'sanchezrestoremore@gmail.com'
+// const ESTIMATE_EMAIL = 'bowen61496@gmail.com'
 
 const INITIAL_FORM = {
   name: '',

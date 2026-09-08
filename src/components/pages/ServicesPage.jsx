@@ -10,6 +10,7 @@ export default function ServicesPage({ navigate }) {
     {
       icon: 'detail',
       title: 'Premium Detailing',
+      estimateValue: 'Detailing',
       description:
         'Our detailing services go beyond a standard wash. We decontaminate, correct, and protect every surface — inside and out — so your vehicle looks and feels like the day you drove it off the lot.',
       items: [
@@ -24,6 +25,7 @@ export default function ServicesPage({ navigate }) {
     {
       icon: 'paint',
       title: 'Paint Correction',
+      estimateValue: 'Paint Correction',
       description:
         'We refine your vehicle\'s finish by reducing swirls, scratches, oxidation, and other surface imperfections. Our paint correction process brings back clarity, depth, and a polished, factory-quality appearance.',
       items: [
@@ -67,7 +69,7 @@ export default function ServicesPage({ navigate }) {
               <div className="service-row-action">
                 <button
                   className="btn btn-outline"
-                  onClick={() => navigate('estimate')}
+                  onClick={() => navigate('estimate', { service: svc.estimateValue })}
                 >
                   Get Estimate
                 </button>

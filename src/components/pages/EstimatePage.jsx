@@ -16,8 +16,8 @@ const INITIAL_FORM = {
   message: '',
 }
 
-export default function EstimatePage() {
-  const [form, setForm] = useState(INITIAL_FORM)
+export default function EstimatePage({ initialService }) {
+  const [form, setForm] = useState({ ...INITIAL_FORM, service: initialService ?? '' })
   const [submitted, setSubmitted] = useState(false)
   const [submissionError, setSubmissionError] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)

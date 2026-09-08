@@ -13,13 +13,16 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home')
   const [displayPage, setDisplayPage] = useState('home')
   const [animState, setAnimState] = useState('idle') // 'idle' | 'out' | 'in'
+  const [estimateService, setEstimateService] = useState(null)
 
-  const navigate = (to) => {
+  const navigate = (to, options = {}) => {
     if (to === currentPage || animState !== 'idle') return
+    setEstimateService(to === 'estimate' ? (options.service ?? null) : null)
     setCurrentPage(to)
     setAnimState('out')
     setTimeout(() => {
       setDisplayPage(to)
+      window.scrollTo(0, 0)
       setAnimState('in')
       setTimeout(() => setAnimState('idle'), 400)
     }, 280)
@@ -39,7 +42,7 @@ export default function App() {
           .filter(Boolean)
           .join(' ')}
       >
-        <PageComponent navigate={navigate} />
+        <PageComponent navigate={navigate} initialService={estimateService} />
         <Footer />
       </div>
     </div>

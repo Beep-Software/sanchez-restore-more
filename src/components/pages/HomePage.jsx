@@ -8,10 +8,10 @@ export default function HomePage({ navigate }) {
       {/* Hero */}
       <section className="hero">
         <div className="hero-inner">
-          <span className="section-eyebrow">Locally owned &amp; community trusted</span>
+          <span className="section-eyebrow">Indiana &amp; Kentucky Area</span>
           <h1>Experienced Craftsmanship. Modern Automotive Care.</h1>
           <p className="hero-lead">
-            Professional paint correction with premium detailing
+            Premium detailing and paint correction
             for drivers who take pride in every mile.
           </p>
           <div className="hero-actions">
@@ -22,21 +22,6 @@ export default function HomePage({ navigate }) {
               Our Services
             </button>
           </div>
-
-          <div className="hero-hours">
-            <div className="hours-item">
-              <p className="hours-day">Mon – Fri</p>
-              <p className="hours-time">8:00 AM – 6:00 PM</p>
-            </div>
-            <div className="hours-item">
-              <p className="hours-day">Saturday</p>
-              <p className="hours-time">9:00 AM – 2:00 PM</p>
-            </div>
-            <div className="hours-item">
-              <p className="hours-day">Sunday</p>
-              <p className="hours-time">By appointment</p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -46,7 +31,6 @@ export default function HomePage({ navigate }) {
           <div className="section-header">
             <span className="section-eyebrow">What we do</span>
             <h2>Every Service, Done Right</h2>
-            <p>From paint correction to showroom-grade detailing, we handle it all with care and precision.</p>
           </div>
           <div className="service-cards">
             <div className="service-card">
@@ -75,31 +59,30 @@ export default function HomePage({ navigate }) {
           <div className="section-header">
             <span className="section-eyebrow">How it works</span>
             <h2>Simple, Transparent Process</h2>
-            <p>No surprises — just clear communication from first look to final delivery.</p>
           </div>
           <div className="process-steps">
             <div className="step">
               <p className="step-num">Step 01</p>
               <h3>Inspect</h3>
               <p>
-                We evaluate your vehicle and provide a transparent, itemized
-                scope of work before any wrench turns.
+                We evaluate your vehicle and provide a clear, itemized quote
+                before any work begins.
               </p>
             </div>
             <div className="step">
               <p className="step-num">Step 02</p>
               <h3>Correct</h3>
               <p>
-                Skilled technicians complete paint correction, detailing, and
-                maintenance work with meticulous attention to detail.
+                Our technicians complete the work with meticulous attention
+                to detail.
               </p>
             </div>
             <div className="step">
               <p className="step-num">Step 03</p>
               <h3>Deliver</h3>
               <p>
-                Final quality checks are completed before your vehicle is
-                returned looking and performing its best.
+                Final quality checks ensure your vehicle leaves looking
+                its best.
               </p>
             </div>
           </div>

@@ -63,7 +63,7 @@ jobs:
       - name: Deploy to k3s
         if: github.event_name == 'push'
         env:
-          KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+          KUBECONFIG: /home/dobowe01/.kube/config
         run: |
           kubectl set image deployment/sanchez-restore-more \
             sanchez-restore-more="${REGISTRY}/${IMAGE_NAME}:${GITHUB_SHA}"

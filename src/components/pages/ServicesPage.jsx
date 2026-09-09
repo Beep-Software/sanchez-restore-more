@@ -43,10 +43,10 @@ export default function ServicesPage({ navigate }) {
     <main>
       <section className="page-hero">
         <span className="section-eyebrow">Our services</span>
-        <h1>Everything Your Vehicle Needs</h1>
+        <h1>Auto Detailing &amp; Paint Correction in Southern Indiana</h1>
         <p>
-          From paint correction to premium detailing, our team
-          delivers honest work at fair prices.
+          From paint correction to premium detailing and ceramic coating, our team delivers
+          honest work at fair prices for Southern Indiana and the Louisville, KY area.
         </p>
       </section>
 

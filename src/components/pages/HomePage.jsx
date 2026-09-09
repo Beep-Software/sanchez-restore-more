@@ -8,11 +8,11 @@ export default function HomePage({ navigate }) {
       {/* Hero */}
       <section className="hero">
         <div className="hero-inner">
-          <span className="section-eyebrow">Indiana &amp; Kentucky Area</span>
-          <h1>Experienced Craftsmanship. Modern Automotive Care.</h1>
+          <span className="section-eyebrow">Southern Indiana &amp; Louisville, KY</span>
+          <h1>Professional Auto Detailing &amp; Paint Correction</h1>
           <p className="hero-lead">
-            Premium detailing and paint correction
-            for drivers who take pride in every mile.
+            Sanchez Restore &amp; More delivers premium car detailing, paint correction, and ceramic coating
+            for drivers across Southern Indiana and the Louisville, KY area.
           </p>
           <div className="hero-actions">
             <button className="btn btn-primary" onClick={() => navigate('estimate')}>

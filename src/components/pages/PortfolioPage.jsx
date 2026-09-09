@@ -42,7 +42,7 @@ export default function PortfolioPage({ navigate }) {
             {filteredProjects.map((project) => (
               <div key={project.id} className="portfolio-card">
                 <div className="portfolio-card-image">
-                  <img src={project.image} alt={project.title} />
+                  <img src={project.image} alt={`${project.title} — ${project.category} in Southern Indiana`} loading="lazy" />
                   <div className="portfolio-card-overlay">
                     <span className="portfolio-card-category">{project.category}</span>
                   </div>

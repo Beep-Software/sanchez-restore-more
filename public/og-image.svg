@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#171f2f"/>
+      <stop offset="1" stop-color="#243044"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f25555"/>
+      <stop offset="1" stop-color="#8f1e3a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="10" fill="url(#accent)"/>
+  <text x="80" y="300" font-family="Georgia, 'Times New Roman', serif" font-size="72" fill="#ffffff" letter-spacing="2">Sanchez Restore &amp; More</text>
+  <text x="80" y="372" font-family="Arial, sans-serif" font-size="36" fill="#c9d4e5">Auto Detailing &amp; Paint Correction</text>
+  <text x="80" y="430" font-family="Arial, sans-serif" font-size="28" fill="#8fa0bd">Southern Indiana &amp; Louisville, KY</text>
+  <text x="80" y="540" font-family="Arial, sans-serif" font-size="24" fill="#f25555">sanchezdetail.com</text>
+</svg>

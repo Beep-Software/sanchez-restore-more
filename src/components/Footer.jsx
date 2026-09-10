@@ -1,6 +1,6 @@
 import { TruckWrenchIcon } from './Icons'
 
-export default function Footer() {
+export default function Footer({ navigate }) {
   const year = new Date().getFullYear()
 
   return (
@@ -32,6 +32,10 @@ export default function Footer() {
 
       <p className="footer-bottom">
         © {year} Sanchez Restore &amp; More. All rights reserved.
+        {' · '}
+        <button type="button" className="footer-admin-link" onClick={() => navigate?.('admin-login')}>
+          Staff Login
+        </button>
       </p>
     </footer>
   )

@@ -5,9 +5,18 @@ import HomePage from './components/pages/HomePage'
 import ServicesPage from './components/pages/ServicesPage'
 import PortfolioPage from './components/pages/PortfolioPage'
 import EstimatePage from './components/pages/EstimatePage'
+import AdminLoginPage from './components/pages/AdminLoginPage'
+import AdminPage from './components/pages/AdminPage'
 import './App.css'
 
-const PAGES = { home: HomePage, services: ServicesPage, portfolio: PortfolioPage, estimate: EstimatePage }
+const PAGES = {
+  home: HomePage,
+  services: ServicesPage,
+  portfolio: PortfolioPage,
+  estimate: EstimatePage,
+  'admin-login': AdminLoginPage,
+  admin: AdminPage,
+}
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -43,7 +52,7 @@ export default function App() {
           .join(' ')}
       >
         <PageComponent navigate={navigate} initialService={estimateService} />
-        <Footer />
+        <Footer navigate={navigate} />
       </div>
     </div>
   )

@@ -320,6 +320,21 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
+.footer-admin-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer-admin-link:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 /* ── Home – Hero ────────────────────────────────────── */
 .hero {
   padding: 100px 24px 80px;
@@ -1381,6 +1396,179 @@
     width: 56px;
     height: 56px;
   }
+}
+
+/* ── Admin ──────────────────────────────────────────── */
+.admin-login-layout {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.admin-login-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border-radius: var(--r-sm);
+  background: rgba(214, 69, 69, 0.1);
+  border: 1px solid rgba(214, 69, 69, 0.35);
+  color: #b23636;
+  font-size: 0.9rem;
+}
+
+.admin-section {
+  padding: 48px 24px 80px;
+  background: var(--bg);
+}
+
+.admin-section-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.admin-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.admin-form-card {
+  background: linear-gradient(150deg, #ffffff 0%, #f0f3fa 100%);
+  border-radius: var(--r-xl);
+  padding: 36px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.admin-form-card h2 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+
+.admin-form-hint {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin: -2px 0 12px;
+}
+
+.admin-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.image-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.image-preview-thumb {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.image-preview-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-preview-remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  line-height: 1;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-preview-remove:hover {
+  background: rgba(214, 69, 69, 0.9);
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.admin-card {
+  background: linear-gradient(160deg, #ffffff 0%, #eff3fa 100%);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(34, 42, 56, 0.16);
+}
+
+.admin-card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--bg);
+}
+
+.admin-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-card-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.admin-card-content {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-card-content h3 {
+  font-size: 1.05rem;
+}
+
+.admin-card-content p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.admin-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.admin-card-delete {
+  color: #b23636;
+  border-color: rgba(214, 69, 69, 0.4);
 }
 
 @media (max-width: 600px) {

@@ -1,20 +1,34 @@
 import { PaintBrushIcon, SparklesIcon } from '../Icons'
-import HomePortfolioShowcase from '../HomePortfolioShowcase'
 import { portfolioProjects } from '../../data/portfolio'
+import { useCarousel } from '../../hooks/useCarousel'
 
 export default function HomePage({ navigate }) {
+  const { current } = useCarousel(portfolioProjects.length, 5000)
+
   return (
     <main>
       {/* Hero */}
       <section className="hero">
+        <div className="hero-image-stack" aria-hidden="true">
+          {portfolioProjects.map((project, idx) => (
+            <div
+              key={project.id}
+              className={`hero-rotating-image${idx === current ? ' active' : ''}`}
+              style={{ backgroundImage: `url(${project.image})` }}
+            />
+          ))}
+        </div>
+        <div className="hero-scrim" aria-hidden="true" />
         <div className="hero-inner">
-          <span className="section-eyebrow">Southern Indiana &amp; Louisville, KY</span>
-          <h1>Professional Auto Detailing &amp; Paint Correction</h1>
-          <p className="hero-lead">
-            Sanchez Restore &amp; More delivers premium car detailing, paint correction, and ceramic coating
-            for drivers across Southern Indiana and the Louisville, KY area.
-          </p>
-          <div className="hero-actions">
+          <div className="hero-glass-copy">
+            <span className="section-eyebrow">Southern Indiana &amp; Louisville, KY</span>
+            <h1>Professional Auto Detailing &amp; Paint Correction</h1>
+            <p className="hero-lead">
+              Sanchez Restore &amp; More delivers premium car detailing, paint correction, and ceramic coating
+              for drivers across Southern Indiana and the Louisville, KY area.
+            </p>
+          </div>
+          <div className="hero-actions hero-glass-actions">
             <button className="btn btn-primary" onClick={() => navigate('estimate')}>
               Get a Free Estimate
             </button>
@@ -107,22 +121,6 @@ export default function HomePage({ navigate }) {
         </div>
       </section> */}
 
-      {/* Portfolio spotlight */}
-      <section className="portfolio-preview">
-        <div className="portfolio-preview-inner">
-          <div className="section-header">
-            <span className="section-eyebrow">Our portfolio</span>
-            <h2>Completed Work</h2>
-            <p>Every project showcases our attention to detail and commitment to excellence.</p>
-          </div>
-          <HomePortfolioShowcase items={portfolioProjects} />
-          <div style={{ textAlign: 'center', marginTop: '32px' }}>
-            <button className="btn btn-outline" onClick={() => navigate('portfolio')}>
-              View All Projects
-            </button>
-          </div>
-        </div>
-      </section>
     </main>
   )
 }

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">2018 Toyota 4Runner ceramic detailing</title>
+  <desc id="desc">White Toyota-style SUV with ceramic coating water beads.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dce6ee"/><stop offset="1" stop-color="#f7f8f8"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="0.58" stop-color="#d7dde4"/><stop offset="1" stop-color="#f9fbff"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect y="548" width="1200" height="252" fill="#d5dde3"/>
+  <ellipse cx="604" cy="650" rx="450" ry="58" fill="#5f6970" opacity="0.25"/>
+  <path d="M174 458 C222 402 283 371 384 365 L749 356 C839 354 895 392 958 466 L1034 487 C1067 496 1087 525 1095 569 L1104 626 L124 626 L142 531 C148 493 158 477 174 458 Z" fill="url(#body)"/>
+  <path d="M240 376 L738 364 C823 362 871 394 923 461 L216 468 C215 426 222 397 240 376 Z" fill="#202936"/>
+  <path d="M278 388 L454 380 L438 460 L235 461 C236 426 248 403 278 388 Z" fill="#a9c5da"/>
+  <path d="M486 379 L676 374 L678 460 L466 460 Z" fill="#9fbed5"/>
+  <path d="M710 375 C789 374 840 401 888 460 L704 460 Z" fill="#90b0ca"/>
+  <path d="M144 532 C278 552 419 552 568 536 C729 519 912 513 1094 548 L1104 626 L124 626 Z" fill="#bdc6ce"/>
+  <rect x="196" y="488" width="790" height="26" rx="13" fill="#eef3f7"/>
+  <path d="M188 520 L1056 520" stroke="#8b969f" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
+  <rect x="155" y="560" width="112" height="38" rx="12" fill="#2d333a"/>
+  <rect x="935" y="560" width="128" height="38" rx="12" fill="#2d333a"/>
+  <circle cx="314" cy="626" r="76" fill="#1b2228"/><circle cx="314" cy="626" r="45" fill="#cfd6dd"/><circle cx="314" cy="626" r="18" fill="#606a72"/>
+  <circle cx="879" cy="626" r="76" fill="#1b2228"/><circle cx="879" cy="626" r="45" fill="#cfd6dd"/><circle cx="879" cy="626" r="18" fill="#606a72"/>
+  <path d="M964 487 L1040 505 C1058 510 1068 524 1071 544 L974 537 Z" fill="#f7fbff"/>
+  <path d="M150 540 C172 512 202 502 236 506 L214 551 L143 562 Z" fill="#ffc75e"/>
+  <g fill="#7ec8ff" opacity="0.55">
+    <circle cx="312" cy="285" r="15"/><circle cx="397" cy="255" r="10"/><circle cx="513" cy="286" r="13"/><circle cx="642" cy="248" r="11"/><circle cx="779" cy="290" r="15"/><circle cx="879" cy="256" r="10"/>
+  </g>
+  <path d="M273 478 C438 450 689 441 930 466" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" opacity="0.74"/>
+</svg>

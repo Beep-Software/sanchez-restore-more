@@ -10,10 +10,12 @@ const CATEGORY_OPTIONS = portfolioCategories.filter((c) => c !== 'All')
 export default function PortfolioAdminForm({ project, onSave, onCancel }) {
   const [title, setTitle] = useState(project?.title ?? '')
   const [category, setCategory] = useState(project?.category ?? CATEGORY_OPTIONS[0])
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false)
   const [description, setDescription] = useState(project?.description ?? '')
   const [existingImages, setExistingImages] = useState(project?.images ?? [])
   const [newImages, setNewImages] = useState([]) // [{ file, previewUrl }]
   const [isSaving, setIsSaving] = useState(false)
+  const categoryRef = useRef(null)
   const fileInputRef = useRef(null)
 
   // Revoke object URLs created for previews when they're replaced/unmounted
@@ -21,6 +23,26 @@ export default function PortfolioAdminForm({ project, onSave, onCancel }) {
     return () => newImages.forEach((img) => URL.revokeObjectURL(img.previewUrl))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (!isCategoryOpen) return
+
+    const handlePointerDown = (event) => {
+      if (!categoryRef.current?.contains(event.target)) setIsCategoryOpen(false)
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setIsCategoryOpen(false)
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isCategoryOpen])
 
   const handleFilesSelected = (e) => {
     const files = Array.from(e.target.files ?? [])
@@ -78,14 +100,39 @@ export default function PortfolioAdminForm({ project, onSave, onCancel }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="admin-category">Category *</label>
-            <select id="admin-category" value={category} onChange={(e) => setCategory(e.target.value)} required>
-              {CATEGORY_OPTIONS.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
+            <label id="admin-category-label">Category *</label>
+            <div className="form-dropdown" ref={categoryRef}>
+              <button
+                type="button"
+                className="form-dropdown-trigger"
+                aria-haspopup="listbox"
+                aria-expanded={isCategoryOpen}
+                aria-labelledby="admin-category-label admin-category-value"
+                onClick={() => setIsCategoryOpen((open) => !open)}
+              >
+                <span id="admin-category-value">{category}</span>
+                <span className="form-dropdown-caret" aria-hidden="true" />
+              </button>
+              {isCategoryOpen && (
+                <div className="form-dropdown-menu" role="listbox" aria-labelledby="admin-category-label">
+                  {CATEGORY_OPTIONS.map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      role="option"
+                      aria-selected={category === cat}
+                      className={`form-dropdown-option${category === cat ? ' selected' : ''}`}
+                      onClick={() => {
+                        setCategory(cat)
+                        setIsCategoryOpen(false)
+                      }}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

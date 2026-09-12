@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">2019 Ford F-150 maintenance service</title>
+  <desc id="desc">Blue full-size pickup truck prepared for routine maintenance.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4ebf1"/><stop offset="1" stop-color="#f7f5ef"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2e6a9d"/><stop offset="0.55" stop-color="#174a76"/><stop offset="1" stop-color="#5e9ec7"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect y="548" width="1200" height="252" fill="#d7d0c4"/>
+  <ellipse cx="604" cy="654" rx="478" ry="58" fill="#5d5a55" opacity="0.28"/>
+  <path d="M126 469 L558 455 L612 374 L823 372 C884 375 931 409 970 466 L1050 486 C1080 493 1100 520 1106 563 L1116 628 L102 628 L116 514 C119 491 122 477 126 469 Z" fill="url(#body)"/>
+  <path d="M617 387 L804 384 C865 388 907 416 940 466 L581 466 Z" fill="#1f2c38"/>
+  <path d="M643 397 L743 393 L740 462 L601 462 Z" fill="#a8c5de"/>
+  <path d="M768 392 C837 393 878 417 907 462 L759 462 Z" fill="#93b5cf"/>
+  <rect x="142" y="472" width="408" height="86" rx="10" fill="#286090"/>
+  <rect x="160" y="489" width="360" height="16" rx="8" fill="#7eb2d7" opacity="0.45"/>
+  <path d="M112 548 C245 566 394 566 546 546 C719 524 915 526 1108 555 L1116 628 L102 628 Z" fill="#123f68" opacity="0.76"/>
+  <circle cx="302" cy="628" r="82" fill="#1c2228"/><circle cx="302" cy="628" r="48" fill="#d1d6dc"/><circle cx="302" cy="628" r="20" fill="#60686f"/>
+  <circle cx="894" cy="628" r="82" fill="#1c2228"/><circle cx="894" cy="628" r="48" fill="#d1d6dc"/><circle cx="894" cy="628" r="20" fill="#60686f"/>
+  <rect x="976" y="500" width="86" height="35" rx="9" fill="#f4f8fb"/><rect x="124" y="530" width="86" height="32" rx="8" fill="#ffc75e"/>
+  <path d="M450 315 L500 315 L500 397 L450 397 Z" fill="#4e5964" opacity="0.65"/>
+  <path d="M475 280 L531 336 L419 336 Z" fill="#c44949"/>
+  <circle cx="760" cy="276" r="34" fill="#c44949" opacity="0.9"/>
+  <rect x="741" y="230" width="38" height="86" rx="19" fill="#c44949"/>
+</svg>

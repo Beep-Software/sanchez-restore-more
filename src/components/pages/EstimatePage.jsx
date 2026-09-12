@@ -1,9 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CheckCircleIcon, ErrorCircleIcon } from '../Icons'
 import { EmailService } from '../../services/email'
 
 const ESTIMATE_EMAIL = 'sanchezrestoremore@gmail.com'
 // const ESTIMATE_EMAIL = 'bowen61496@gmail.com'
+
+const SERVICE_OPTIONS = [
+  { value: '', label: 'Select a service...' },
+  { value: 'Paint Correction', label: 'Paint Correction' },
+  { value: 'Detailing', label: 'Detailing' },
+  { value: 'Routine Maintenance', label: 'Routine Maintenance' },
+  { value: 'Other / Not Sure', label: 'Other / Not Sure' },
+]
 
 const INITIAL_FORM = {
   name: '',
@@ -18,9 +26,31 @@ const INITIAL_FORM = {
 
 export default function EstimatePage({ initialService }) {
   const [form, setForm] = useState({ ...INITIAL_FORM, service: initialService ?? '' })
+  const [isServiceOpen, setIsServiceOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [submissionError, setSubmissionError] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const serviceRef = useRef(null)
+
+  useEffect(() => {
+    if (!isServiceOpen) return
+
+    const handlePointerDown = (event) => {
+      if (!serviceRef.current?.contains(event.target)) setIsServiceOpen(false)
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setIsServiceOpen(false)
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isServiceOpen])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -230,19 +260,41 @@ export default function EstimatePage({ initialService }) {
               </div>
 
               <div className="form-group">
-                <label htmlFor="service">Service Needed</label>
-                <select
-                  id="service"
-                  name="service"
-                  value={form.service}
-                  onChange={handleChange}
-                >
-                  <option value="">Select a service…</option>
-                  <option value="Paint Correction">Paint Correction</option>
-                  <option value="Detailing">Detailing</option>
-                  <option value="Routine Maintenance">Routine Maintenance</option>
-                  <option value="Other / Not Sure">Other / Not Sure</option>
-                </select>
+                <label id="service-label">Service Needed</label>
+                <div className="form-dropdown" ref={serviceRef}>
+                  <button
+                    type="button"
+                    className="form-dropdown-trigger"
+                    aria-haspopup="listbox"
+                    aria-expanded={isServiceOpen}
+                    aria-labelledby="service-label service-value"
+                    onClick={() => setIsServiceOpen((open) => !open)}
+                  >
+                    <span id="service-value">
+                      {SERVICE_OPTIONS.find((option) => option.value === form.service)?.label ?? 'Select a service...'}
+                    </span>
+                    <span className="form-dropdown-caret" aria-hidden="true" />
+                  </button>
+                  {isServiceOpen && (
+                    <div className="form-dropdown-menu" role="listbox" aria-labelledby="service-label">
+                      {SERVICE_OPTIONS.map((option) => (
+                        <button
+                          key={option.value || 'none'}
+                          type="button"
+                          role="option"
+                          aria-selected={form.service === option.value}
+                          className={`form-dropdown-option${form.service === option.value ? ' selected' : ''}`}
+                          onClick={() => {
+                            setForm((prev) => ({ ...prev, service: option.value }))
+                            setIsServiceOpen(false)
+                          }}
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div className="form-group">

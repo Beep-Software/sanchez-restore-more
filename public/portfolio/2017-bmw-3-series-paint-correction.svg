@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">2017 BMW 3 Series paint correction</title>
+  <desc id="desc">Dark sport sedan with corrected high-gloss finish.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d6dde6"/><stop offset="1" stop-color="#f3f5f8"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#29313f"/><stop offset="0.52" stop-color="#101722"/><stop offset="1" stop-color="#4d5968"/></linearGradient>
+    <radialGradient id="light" cx="0.5" cy="0.42" r="0.62"><stop offset="0" stop-color="#ffffff" stop-opacity="0.8"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect y="552" width="1200" height="248" fill="#cbd2da"/>
+  <ellipse cx="600" cy="646" rx="436" ry="54" fill="#4d5660" opacity="0.28"/>
+  <path d="M162 524 C246 454 363 419 511 410 L681 397 C778 390 847 416 930 477 L1020 498 C1055 506 1078 531 1088 568 L1097 616 L113 616 L132 559 C138 542 148 531 162 524 Z" fill="url(#body)"/>
+  <path d="M384 424 C450 383 591 365 710 377 C793 385 854 417 910 474 L300 478 C324 452 351 435 384 424 Z" fill="#121923"/>
+  <path d="M421 416 C491 390 589 381 670 384 L649 472 L316 474 C341 446 371 428 421 416 Z" fill="#9fb9cf" opacity="0.78"/>
+  <path d="M694 385 C775 392 830 421 874 472 L674 472 Z" fill="#89a8c0" opacity="0.76"/>
+  <path d="M141 554 C290 566 454 563 620 548 C801 530 945 529 1088 559 L1097 616 L113 616 Z" fill="#0b1017" opacity="0.88"/>
+  <path d="M282 501 C445 476 713 467 940 486" fill="none" stroke="#f3f6f8" stroke-width="12" stroke-linecap="round" opacity="0.64"/>
+  <path d="M350 541 C525 543 691 531 850 510" fill="none" stroke="#9fb7d0" stroke-width="7" stroke-linecap="round" opacity="0.46"/>
+  <circle cx="314" cy="616" r="74" fill="#151a20"/><circle cx="314" cy="616" r="44" fill="#d8dde4"/><circle cx="314" cy="616" r="18" fill="#53606c"/>
+  <circle cx="884" cy="616" r="74" fill="#151a20"/><circle cx="884" cy="616" r="44" fill="#d8dde4"/><circle cx="884" cy="616" r="18" fill="#53606c"/>
+  <path d="M971 503 L1044 520 C1062 524 1073 538 1076 554 L986 550 Z" fill="#f7fbff"/>
+  <path d="M141 548 C168 524 204 516 245 520 L215 555 L131 563 Z" fill="#ffe07b"/>
+  <circle cx="622" cy="314" r="126" fill="url(#light)"/>
+  <path d="M221 326 C333 285 477 274 617 290" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.45"/>
+  <path d="M813 284 C881 292 950 316 1005 356" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity="0.34"/>
+</svg>

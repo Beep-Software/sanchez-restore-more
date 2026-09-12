@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">2016 Chevrolet Silverado multi-service</title>
+  <desc id="desc">Silver full-size pickup receiving brake, tire, fluid, and rust-prevention service.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dde6ed"/><stop offset="1" stop-color="#f6f3ed"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef2f4"/><stop offset="0.52" stop-color="#aeb8c2"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect y="548" width="1200" height="252" fill="#d2ccc1"/>
+  <ellipse cx="604" cy="654" rx="480" ry="58" fill="#5b5852" opacity="0.26"/>
+  <path d="M116 470 L540 454 L598 378 L818 376 C878 380 926 411 968 468 L1050 488 C1082 496 1102 522 1110 565 L1120 628 L98 628 L110 516 C112 493 114 479 116 470 Z" fill="url(#body)"/>
+  <path d="M604 391 L800 388 C858 392 900 418 934 467 L568 467 Z" fill="#222a33"/>
+  <path d="M630 400 L740 396 L736 462 L588 462 Z" fill="#a9c4da"/>
+  <path d="M766 396 C832 398 872 420 902 462 L757 462 Z" fill="#92afc7"/>
+  <rect x="134" y="474" width="394" height="84" rx="10" fill="#c5cdd4"/>
+  <rect x="154" y="490" width="342" height="16" rx="8" fill="#ffffff" opacity="0.55"/>
+  <path d="M108 548 C248 568 393 566 544 548 C722 526 916 527 1110 556 L1120 628 L98 628 Z" fill="#8f9aa4" opacity="0.82"/>
+  <circle cx="302" cy="628" r="82" fill="#1d2329"/><circle cx="302" cy="628" r="50" fill="#d7dce2"/><circle cx="302" cy="628" r="20" fill="#5b646d"/>
+  <circle cx="894" cy="628" r="82" fill="#1d2329"/><circle cx="894" cy="628" r="50" fill="#d7dce2"/><circle cx="894" cy="628" r="20" fill="#5b646d"/>
+  <circle cx="302" cy="628" r="61" fill="none" stroke="#c04a38" stroke-width="8" opacity="0.86"/>
+  <rect x="980" y="502" width="84" height="34" rx="9" fill="#f7fbff"/><rect x="120" y="531" width="88" height="32" rx="8" fill="#ffd26d"/>
+  <path d="M304 304 L352 304 L352 352 L304 352 Z" fill="#d2b15c"/><path d="M328 278 L385 327 L328 376 L271 327 Z" fill="#d2b15c"/>
+  <path d="M706 286 C758 255 833 258 884 294" fill="none" stroke="#b56b43" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <path d="M728 318 C771 296 826 299 862 324" fill="none" stroke="#b56b43" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
+  <path d="M176 572 C251 588 348 589 425 572" fill="none" stroke="#b56b43" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+</svg>

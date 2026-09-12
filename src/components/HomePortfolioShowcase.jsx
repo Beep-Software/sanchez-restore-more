@@ -54,7 +54,17 @@ export default function HomePortfolioShowcase({ items }) {
             aria-selected={idx === current}
             aria-label={`Show project ${idx + 1}: ${item.title}`}
           >
-            <img src={item.image} alt="" loading="lazy" aria-hidden="true" />
+            <img
+              src={item.image}
+              alt=""
+              loading="lazy"
+              aria-hidden="true"
+              onError={(event) => {
+                if (item.fallbackImage && event.currentTarget.src !== item.fallbackImage) {
+                  event.currentTarget.src = item.fallbackImage
+                }
+              }}
+            />
             <span>{item.title}</span>
           </button>
         ))}

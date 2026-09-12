@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">2015 Honda Civic paint correction</title>
+  <desc id="desc">Blue compact sedan with polished paint correction highlights.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9e8f7"/>
+      <stop offset="1" stop-color="#f6f8fb"/>
+    </linearGradient>
+    <linearGradient id="paint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f5f9e"/>
+      <stop offset="0.48" stop-color="#123b76"/>
+      <stop offset="1" stop-color="#5ea4e8"/>
+    </linearGradient>
+    <radialGradient id="shine" cx="0.62" cy="0.32" r="0.58">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="0.28" stop-color="#b9ddff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky)"/>
+  <rect y="548" width="1200" height="252" fill="#dfe5ec"/>
+  <path d="M0 552 C220 514 374 540 556 518 C796 488 940 526 1200 494 L1200 800 L0 800 Z" fill="#c7d0da"/>
+  <ellipse cx="594" cy="648" rx="430" ry="56" fill="#6f7b86" opacity="0.28"/>
+  <path d="M226 506 C274 432 351 391 468 378 L665 356 C761 346 827 381 905 450 L996 470 C1039 480 1062 506 1074 550 L1092 614 L124 614 L142 552 C154 524 180 509 226 506 Z" fill="url(#paint)"/>
+  <path d="M374 397 C438 355 567 332 693 342 C771 348 825 382 886 448 L341 451 C350 427 361 411 374 397 Z" fill="#172a3d" opacity="0.92"/>
+  <path d="M407 391 C465 365 562 352 653 356 L630 448 L348 448 C358 424 376 404 407 391 Z" fill="#a9c9e7" opacity="0.82"/>
+  <path d="M675 358 C750 366 801 396 858 448 L652 448 Z" fill="#93b7d8" opacity="0.78"/>
+  <path d="M151 548 C290 568 473 573 653 553 C816 535 958 524 1072 552 L1092 614 L124 614 Z" fill="#0f2e61" opacity="0.84"/>
+  <path d="M230 516 C390 502 677 489 906 455" fill="none" stroke="#e9f6ff" stroke-width="13" stroke-linecap="round" opacity="0.85"/>
+  <path d="M223 548 C387 555 580 547 766 523" fill="none" stroke="#7fc4ff" stroke-width="8" stroke-linecap="round" opacity="0.58"/>
+  <circle cx="302" cy="612" r="72" fill="#18202a"/>
+  <circle cx="302" cy="612" r="42" fill="#d8dde4"/>
+  <circle cx="302" cy="612" r="17" fill="#66707d"/>
+  <circle cx="884" cy="612" r="72" fill="#18202a"/>
+  <circle cx="884" cy="612" r="42" fill="#d8dde4"/>
+  <circle cx="884" cy="612" r="17" fill="#66707d"/>
+  <path d="M940 489 L1018 508 C1036 513 1046 527 1050 544 L958 536 Z" fill="#f6fbff" opacity="0.9"/>
+  <path d="M165 540 C188 516 219 508 252 511 L229 548 L155 556 Z" fill="#ffd46b" opacity="0.9"/>
+  <circle cx="750" cy="312" r="72" fill="url(#shine)"/>
+  <path d="M205 302 C280 256 410 232 536 242" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  <path d="M188 330 C260 294 351 278 445 282" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.38"/>
+</svg>

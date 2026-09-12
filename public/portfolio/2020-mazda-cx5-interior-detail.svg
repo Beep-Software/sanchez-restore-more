@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">2020 Mazda CX-5 interior deep clean</title>
+  <desc id="desc">Red compact SUV with an open cabin showing detailed interior cleaning.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8eef2"/><stop offset="1" stop-color="#faf7f2"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d94a43"/><stop offset="0.5" stop-color="#982b32"/><stop offset="1" stop-color="#ed7a65"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect y="552" width="1200" height="248" fill="#d9d3ca"/>
+  <ellipse cx="600" cy="650" rx="438" ry="56" fill="#5a5752" opacity="0.25"/>
+  <path d="M164 476 C215 414 290 383 392 375 L724 360 C813 358 874 397 942 468 L1030 489 C1065 497 1088 525 1096 566 L1108 624 L116 624 L134 535 C140 506 149 489 164 476 Z" fill="url(#body)"/>
+  <path d="M260 389 L704 370 C786 370 839 401 900 465 L229 468 C231 432 242 405 260 389 Z" fill="#1f252d"/>
+  <path d="M297 398 L468 389 L448 462 L245 462 C249 430 263 409 297 398 Z" fill="#a9c6da"/>
+  <path d="M503 387 L665 380 L665 462 L481 462 Z" fill="#96b8d1"/>
+  <path d="M692 380 C769 380 818 407 864 462 L690 462 Z" fill="#89abc4"/>
+  <path d="M525 383 L672 381 L646 591 L510 602 Z" fill="#6b292a" opacity="0.96"/>
+  <path d="M560 425 L625 423 L610 548 L548 555 Z" fill="#f5dcc5"/>
+  <path d="M132 548 C282 563 451 559 622 541 C796 523 956 526 1096 556 L1108 624 L116 624 Z" fill="#80252a" opacity="0.82"/>
+  <circle cx="304" cy="624" r="76" fill="#1b2026"/><circle cx="304" cy="624" r="45" fill="#d6dce2"/><circle cx="304" cy="624" r="18" fill="#5c646c"/>
+  <circle cx="878" cy="624" r="76" fill="#1b2026"/><circle cx="878" cy="624" r="45" fill="#d6dce2"/><circle cx="878" cy="624" r="18" fill="#5c646c"/>
+  <path d="M952 490 L1032 508 C1052 513 1064 528 1067 546 L967 539 Z" fill="#f7fbff"/>
+  <path d="M142 540 C167 515 202 506 239 510 L212 551 L133 562 Z" fill="#ffd46b"/>
+  <path d="M260 487 C430 467 691 457 932 470" fill="none" stroke="#ffd2c9" stroke-width="12" stroke-linecap="round" opacity="0.5"/>
+  <g stroke="#ffffff" stroke-linecap="round" opacity="0.75">
+    <path d="M745 270 L776 240" stroke-width="8"/>
+    <path d="M778 270 L820 229" stroke-width="6"/>
+    <path d="M815 280 L850 246" stroke-width="5"/>
+  </g>
+</svg>

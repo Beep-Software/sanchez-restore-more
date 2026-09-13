@@ -3,7 +3,7 @@ import { useCarousel } from '../../hooks/useCarousel'
 import { usePortfolioProjects } from '../../hooks/usePortfolioProjects'
 
 export default function HomePage({ navigate }) {
-  const { projects: portfolioProjects, isLoading, error } = usePortfolioProjects()
+  const { projects: portfolioProjects, error } = usePortfolioProjects()
   const { current } = useCarousel(portfolioProjects.length, 5000)
 
   return (

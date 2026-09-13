@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ErrorCircleIcon } from '../Icons'
 import { AuthService } from '../../services/auth'
+import { notificationService } from '../../services/notifications'
 
 export default function AdminLoginPage({ navigate }) {
   const [form, setForm] = useState({ username: '', password: '' })
@@ -22,9 +23,11 @@ export default function AdminLoginPage({ navigate }) {
     const authService = new AuthService()
     try {
       await authService.login(form)
+      notificationService.success('Signed in successfully.')
       navigate('admin')
     } catch {
       setError(true)
+      notificationService.error('Sign in failed. Check your credentials and try again.')
     } finally {
       setIsSubmitting(false)
     }

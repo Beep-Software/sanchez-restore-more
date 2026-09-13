@@ -924,6 +924,65 @@
   cursor: wait;
 }
 
+button:disabled {
+  opacity: 0.58;
+  cursor: wait;
+  pointer-events: none;
+}
+
+.notification-stack {
+  position: fixed;
+  z-index: 1000;
+  top: 88px;
+  right: 24px;
+  display: grid;
+  gap: 10px;
+  width: min(380px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.notification {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--r-sm);
+  background: #fff;
+  box-shadow: var(--shadow-lg);
+  color: var(--text);
+  font-size: 0.9rem;
+  pointer-events: auto;
+  animation: notification-in 180ms ease-out both;
+}
+
+.notification-success { border-left-color: #2d8a57; }
+.notification-error { border-left-color: #c53c3c; }
+.notification-info { border-left-color: var(--accent); }
+
+.notification button {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.portfolio-loading-status {
+  margin: 24px 0;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+@keyframes notification-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .form-note {
   text-align: center;
   font-size: 0.82rem;

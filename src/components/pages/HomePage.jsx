@@ -1,23 +1,24 @@
 import { PaintBrushIcon, SparklesIcon } from '../Icons'
-import { portfolioProjects } from '../../data/portfolio'
 import { useCarousel } from '../../hooks/useCarousel'
+import { usePortfolioProjects } from '../../hooks/usePortfolioProjects'
 
 export default function HomePage({ navigate }) {
+  const { projects: portfolioProjects, isLoading, error } = usePortfolioProjects()
   const { current } = useCarousel(portfolioProjects.length, 5000)
 
   return (
     <main>
       {/* Hero */}
       <section className="hero">
-        <div className="hero-image-stack" aria-hidden="true">
+        {portfolioProjects.length > 0 && <div className="hero-image-stack" aria-hidden="true">
           {portfolioProjects.map((project, idx) => (
             <div
               key={project.id}
               className={`hero-rotating-image${idx === current ? ' active' : ''}`}
-              style={{ backgroundImage: `url(${project.image})` }}
+              style={{ backgroundImage: `url(${project.images?.[0]?.url})` }}
             />
           ))}
-        </div>
+        </div>}
         <div className="hero-scrim" aria-hidden="true" />
         <div className="hero-inner">
           <div className="hero-glass-copy">
@@ -36,6 +37,7 @@ export default function HomePage({ navigate }) {
               Our Services
             </button>
           </div>
+          {error && <p className="portfolio-loading-status" role="alert">{error}</p>}
         </div>
       </section>
 

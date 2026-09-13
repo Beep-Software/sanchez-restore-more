@@ -74,6 +74,9 @@ export default function PortfolioAdminForm({ project, onSave, onCancel }) {
         description,
         existingImages,
         newFiles: newImages.map((img) => img.file),
+        removedImageIds: (project?.images ?? [])
+          .filter((image) => !existingImages.some((current) => current.id === image.id))
+          .map((image) => image.id),
       })
     } finally {
       setIsSaving(false)

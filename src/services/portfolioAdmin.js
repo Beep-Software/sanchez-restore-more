@@ -1,12 +1,23 @@
 import axios from "axios"
 import { AuthService } from "./auth"
 
-// TODO: backend not implemented yet — routes will persist images to a mounted
-// file system and title/description/category to SQL Server
+const API_ORIGIN = 'https://api.beepsoftware.com' //import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000"
+const API_PATH = `${API_ORIGIN}/api/sanchezRestore`
+
+export function normalizeImage(image) {
+    const imageUrl = image.url ?? `/api/sanchezRestore/images/${image.id ?? image.image_id}`
+    return { ...image, id: String(image.id ?? image.image_id), url: new URL(imageUrl, API_ORIGIN).toString() }
+}
+
+export function normalizeProject(project) {
+    const images = (project.images ?? []).map(normalizeImage)
+    return { ...project, id: String(project.id ?? project.project_id), title: project.title ?? "", category: project.category ?? "Detailing", description: project.description ?? "", images, image: images[0]?.url ?? "" }
+}
+
 export class PortfolioAdminService {
     constructor() {
         this.instance = axios.create({
-            baseURL: "/api/portfolio",
+            baseURL: API_PATH,
         })
         this.auth = new AuthService()
     }
@@ -18,14 +29,19 @@ export class PortfolioAdminService {
 
     async list() {
         try {
-            const response = await this.instance.get("/", {
+            const response = await this.instance.get("/projects", {
                 headers: this._authHeaders(),
             })
-            return response.data
+            return (response.data.projects ?? []).map(normalizeProject)
         } catch (error) {
             console.error(error)
             throw error
         }
+    }
+
+    async listPublic() {
+        const response = await this.instance.get("/projects")
+        return (response.data.projects ?? []).map(normalizeProject)
     }
 
     /**
@@ -39,10 +55,10 @@ export class PortfolioAdminService {
         images.forEach((file) => formData.append("images", file))
 
         try {
-            const response = await this.instance.post("/", formData, {
-                headers: { ...this._authHeaders(), "Content-Type": "multipart/form-data" },
+            const response = await this.instance.post("/projects", formData, {
+                headers: this._authHeaders(),
             })
-            return response.data
+            return normalizeProject(response.data.project)
         } catch (error) {
             console.error(error)
             throw error
@@ -62,10 +78,10 @@ export class PortfolioAdminService {
         removedImageIds.forEach((imageId) => formData.append("removedImageIds", imageId))
 
         try {
-            const response = await this.instance.put(`/${id}`, formData, {
-                headers: { ...this._authHeaders(), "Content-Type": "multipart/form-data" },
+            const response = await this.instance.put(`/projects/${id}`, formData, {
+                headers: this._authHeaders(),
             })
-            return response.data
+            return normalizeProject(response.data.project)
         } catch (error) {
             console.error(error)
             throw error
@@ -74,7 +90,7 @@ export class PortfolioAdminService {
 
     async remove(id) {
         try {
-            const response = await this.instance.delete(`/${id}`, {
+            const response = await this.instance.delete(`/projects/${id}`, {
                 headers: this._authHeaders(),
             })
             return response.data

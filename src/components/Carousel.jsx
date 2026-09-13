@@ -4,7 +4,7 @@ import { useCarousel } from '../hooks/useCarousel'
  * Image carousel component with auto-rotation and navigation
  */
 export default function Carousel({ items, height = '400px' }) {
-  const { current, next, prev, goTo } = useCarousel(items.length, 5000)
+  const { current, next, prev, goTo } = useCarousel(items?.length ?? 0, 5000)
 
   if (!items || items.length === 0) return null
 

@@ -7,6 +7,7 @@ import PortfolioPage from './components/pages/PortfolioPage'
 import EstimatePage from './components/pages/EstimatePage'
 import AdminLoginPage from './components/pages/AdminLoginPage'
 import AdminPage from './components/pages/AdminPage'
+import NotificationManager from './components/NotificationManager'
 import './App.css'
 
 const PAGES = {
@@ -41,6 +42,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <NotificationManager />
       <Header currentPage={currentPage} navigate={navigate} />
       <div
         className={[

@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { portfolioProjects, portfolioCategories } from '../../data/portfolio'
+import { usePortfolioProjects } from '../../hooks/usePortfolioProjects'
 
 export default function PortfolioPage({ navigate }) {
+  const { projects: portfolioProjects, isLoading, error } = usePortfolioProjects()
+  const categories = ['All', ...new Set(portfolioProjects.map((project) => project.category).filter(Boolean))]
   const [activeCategory, setActiveCategory] = useState('All')
 
   const filteredProjects =
@@ -26,7 +28,7 @@ export default function PortfolioPage({ navigate }) {
         <div className="portfolio-inner">
           {/* Category filter */}
           <div className="portfolio-filter">
-            {portfolioCategories.map((cat) => (
+            {categories.map((cat) => (
               <button
                 key={cat}
                 className={`portfolio-filter-btn${activeCategory === cat ? ' active' : ''}`}
@@ -43,14 +45,10 @@ export default function PortfolioPage({ navigate }) {
               <div key={project.id} className="portfolio-card">
                 <div className="portfolio-card-image">
                   <img
-                    src={project.image}
+                    src={project.images?.[0]?.url}
                     alt={`${project.title} — ${project.category} in Southern Indiana`}
-                    loading="lazy"
-                    onError={(event) => {
-                      if (project.fallbackImage && event.currentTarget.src !== project.fallbackImage) {
-                        event.currentTarget.src = project.fallbackImage
-                      }
-                    }}
+                    loading={filteredProjects.indexOf(project) === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
                   />
                   <div className="portfolio-card-overlay">
                     <span className="portfolio-card-category">{project.category}</span>
@@ -63,6 +61,9 @@ export default function PortfolioPage({ navigate }) {
               </div>
             ))}
           </div>
+
+          {isLoading && <p className="portfolio-loading-status">Loading completed projects…</p>}
+          {error && <p className="portfolio-loading-status" role="alert">{error}</p>}
 
           {filteredProjects.length === 0 && (
             <div style={{ textAlign: 'center', padding: '48px 24px', color: 'var(--text-secondary)' }}>

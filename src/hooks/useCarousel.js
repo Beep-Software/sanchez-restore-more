@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
  */
 export function useCarousel(count, interval = 5000) {
   const [current, setCurrent] = useState(0)
+  const safeCurrent = count > 0 ? Math.min(current, count - 1) : 0
 
   // Auto-rotate effect
   useEffect(() => {
@@ -19,9 +20,9 @@ export function useCarousel(count, interval = 5000) {
   }, [count, interval])
 
   return {
-    current,
-    next: () => setCurrent((prev) => (prev + 1) % count),
-    prev: () => setCurrent((prev) => (prev - 1 + count) % count),
-    goTo: (idx) => setCurrent(idx % count),
+    current: safeCurrent,
+    next: () => setCurrent((prev) => (count > 0 ? (prev + 1) % count : 0)),
+    prev: () => setCurrent((prev) => (count > 0 ? (prev - 1 + count) % count : 0)),
+    goTo: (idx) => setCurrent(count > 0 ? idx % count : 0),
   }
 }

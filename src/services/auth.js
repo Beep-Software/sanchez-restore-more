@@ -13,7 +13,7 @@ export class AuthService {
     async login({ username, password }) {
         try {
             const response = await this.instance.post("/token", { username, password })
-            const token = response.data?.token
+            const token = response.data?.access_token ?? response.data?.token
             if (token) localStorage.setItem(TOKEN_KEY, token)
             return response.data
         } catch (error) {

@@ -11,7 +11,7 @@ export default function HomePortfolioShowcase({ items }) {
     <div className="home-portfolio-stage" aria-label="Portfolio spotlight">
       <div
         className="home-portfolio-backdrop"
-        style={{ backgroundImage: `url(${activeItem.image})` }}
+        style={{ backgroundImage: `url(${activeItem.images?.[0]?.url})` }}
         aria-hidden="true"
       />
       <div className="home-portfolio-vignette" aria-hidden="true" />
@@ -55,15 +55,10 @@ export default function HomePortfolioShowcase({ items }) {
             aria-label={`Show project ${idx + 1}: ${item.title}`}
           >
             <img
-              src={item.image}
+              src={item.images?.[0]?.url}
               alt=""
               loading="lazy"
               aria-hidden="true"
-              onError={(event) => {
-                if (item.fallbackImage && event.currentTarget.src !== item.fallbackImage) {
-                  event.currentTarget.src = item.fallbackImage
-                }
-              }}
             />
             <span>{item.title}</span>
           </button>

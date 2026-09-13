@@ -18,6 +18,7 @@ export class PortfolioAdminService {
     constructor() {
         this.instance = axios.create({
             baseURL: API_PATH,
+            timeout: 75000,
         })
         this.auth = new AuthService()
     }

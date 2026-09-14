@@ -28,16 +28,17 @@ export default function HomePage({ navigate }) {
               Sanchez Restore &amp; More delivers premium car detailing, paint correction, and ceramic coating
               for drivers across Southern Indiana and the Louisville, KY area.
             </p>
-          </div>
-          <div className="hero-actions hero-glass-actions">
-            <button className="btn btn-primary" onClick={() => navigate('estimate')}>
-              Get a Free Estimate
-            </button>
-            <button className="btn btn-secondary" onClick={() => navigate('services')}>
-              Our Services
-            </button>
-          </div>
+            <div className="hero-glass-buttons">
+              <button className="btn btn-primary" onClick={() => navigate('estimate')}>
+                Get a Free Estimate
+              </button>
+              <button className="btn btn-secondary" onClick={() => navigate('services')}>
+                Our Services
+              </button>
+            </div>
           {error && <p className="portfolio-loading-status" role="alert">{error}</p>}
+          </div>
+          
         </div>
       </section>
 

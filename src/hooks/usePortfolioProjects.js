@@ -12,10 +12,15 @@ export function usePortfolioProjects() {
     new PortfolioAdminService().listPublic().then((persistedProjects) => {
       if (active) {
         setProjects(persistedProjects)
-        persistedProjects.slice(0, 4).flatMap((project) => project.images ?? []).forEach((image) => {
+        // Only preload each project's first image (the only one the hero ever shows), and
+        // prioritize the very first one since it's what's visible immediately on load.
+        persistedProjects.slice(0, 4).forEach((project, idx) => {
+          const firstImage = project.images?.[0]
+          if (!firstImage) return
           const preload = new Image()
           preload.decoding = 'async'
-          preload.src = image.url
+          if (idx === 0) preload.fetchPriority = 'high'
+          preload.src = firstImage.url
         })
       }
     }).catch(() => {

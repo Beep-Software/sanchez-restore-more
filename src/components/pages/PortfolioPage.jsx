@@ -1,5 +1,54 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { usePortfolioProjects } from '../../hooks/usePortfolioProjects'
+import { useCarousel } from '../../hooks/useCarousel'
+
+function PortfolioCardImage({ project }) {
+  const images = project.images ?? []
+  const { current, next, prev, goTo } = useCarousel(images.length, 5000)
+  const touchStartX = useRef(null)
+
+  function handleTouchStart(e) {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  function handleTouchEnd(e) {
+    if (touchStartX.current === null) return
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current
+    if (Math.abs(deltaX) > 40) {
+      if (deltaX < 0) next()
+      else prev()
+    }
+    touchStartX.current = null
+  }
+
+  return (
+    <div className="portfolio-card-image" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+      {images.map((image, idx) => (
+        <img
+          key={image.id ?? idx}
+          src={image.url}
+          alt={`${project.title} — ${project.category} in Southern Indiana`}
+          loading={idx === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+          className={`portfolio-card-photo${idx === current ? ' active' : ''}`}
+        />
+      ))}
+      {images.length > 1 && (
+        <div className="portfolio-card-dots">
+          {images.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              className={`portfolio-card-dot${idx === current ? ' active' : ''}`}
+              aria-label={`Show photo ${idx + 1} of ${project.title}`}
+              onClick={() => goTo(idx)}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function PortfolioPage({ navigate }) {
   const { projects: portfolioProjects, isLoading, error } = usePortfolioProjects()
@@ -43,19 +92,12 @@ export default function PortfolioPage({ navigate }) {
           <div className="portfolio-grid">
             {filteredProjects.map((project) => (
               <div key={project.id} className="portfolio-card">
-                <div className="portfolio-card-image">
-                  <img
-                    src={project.images?.[0]?.url}
-                    alt={`${project.title} — ${project.category} in Southern Indiana`}
-                    loading={filteredProjects.indexOf(project) === 0 ? 'eager' : 'lazy'}
-                    decoding="async"
-                  />
-                  <div className="portfolio-card-overlay">
-                    <span className="portfolio-card-category">{project.category}</span>
-                  </div>
-                </div>
+                <PortfolioCardImage project={project} />
                 <div className="portfolio-card-content">
-                  <h3>{project.title}</h3>
+                  <div className="portfolio-card-heading">
+                    <h3>{project.title}</h3>
+                    {project.category && <span className="portfolio-card-tag">{project.category}</span>}
+                  </div>
                   <p>{project.description}</p>
                 </div>
               </div>

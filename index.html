@@ -5,6 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Warm up the connection to the portfolio API early so the first hero photo/data request doesn't pay the DNS+TLS cost -->
+    <link rel="preconnect" href="https://api.beepsoftware.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.beepsoftware.com" />
+
     <!-- Primary SEO -->
     <title>Auto Detailing &amp; Paint Correction in Southern Indiana &amp; Louisville, KY | Sanchez Restore &amp; More</title>
     <meta name="description" content="Sanchez Restore &amp; More provides professional auto detailing, paint correction, and ceramic coating for Southern Indiana and the Louisville, KY area. Family-run, honest work at fair prices. Get a free estimate today." />

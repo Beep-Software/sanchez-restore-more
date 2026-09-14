@@ -8,7 +8,13 @@ import { useState, useEffect } from 'react'
  */
 export function useCarousel(count, interval = 5000) {
   const [current, setCurrent] = useState(0)
+  const [timerReset, setTimerReset] = useState(0)
   const safeCurrent = count > 0 ? Math.min(current, count - 1) : 0
+
+  const navigate = (getNextIndex) => {
+    setCurrent((previous) => (count > 0 ? getNextIndex(previous) : 0))
+    setTimerReset((reset) => reset + 1)
+  }
 
   // Auto-rotate effect
   useEffect(() => {
@@ -17,12 +23,12 @@ export function useCarousel(count, interval = 5000) {
       setCurrent((prev) => (prev + 1) % count)
     }, interval)
     return () => clearInterval(timer)
-  }, [count, interval])
+  }, [count, interval, timerReset])
 
   return {
     current: safeCurrent,
-    next: () => setCurrent((prev) => (count > 0 ? (prev + 1) % count : 0)),
-    prev: () => setCurrent((prev) => (count > 0 ? (prev - 1 + count) % count : 0)),
-    goTo: (idx) => setCurrent(count > 0 ? idx % count : 0),
+    next: () => navigate((previous) => (previous + 1) % count),
+    prev: () => navigate((previous) => (previous - 1 + count) % count),
+    goTo: (index) => navigate(() => index % count),
   }
 }

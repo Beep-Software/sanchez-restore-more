@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import { portfolioCategories } from '../data/portfolio'
 
 const CATEGORY_OPTIONS = portfolioCategories.filter((c) => c !== 'All')
+const MAX_PROJECT_IMAGES = 5
 
 /**
  * Create/edit form for a portfolio project. Supports multiple image uploads
  * (e.g. before/after or in-progress shots) plus title/description/category.
  */
-export default function PortfolioAdminForm({ project, onSave, onCancel }) {
+export default function PortfolioAdminForm({ project, onSave, onCancel, disabled = false }) {
   const [title, setTitle] = useState(project?.title ?? '')
   const [category, setCategory] = useState(project?.category ?? CATEGORY_OPTIONS[0])
   const [isCategoryOpen, setIsCategoryOpen] = useState(false)
@@ -15,6 +16,7 @@ export default function PortfolioAdminForm({ project, onSave, onCancel }) {
   const [existingImages, setExistingImages] = useState(project?.images ?? [])
   const [newImages, setNewImages] = useState([]) // [{ file, previewUrl }]
   const [isSaving, setIsSaving] = useState(false)
+  const [imageError, setImageError] = useState('')
   const categoryRef = useRef(null)
   const fileInputRef = useRef(null)
 
@@ -46,8 +48,11 @@ export default function PortfolioAdminForm({ project, onSave, onCancel }) {
 
   const handleFilesSelected = (e) => {
     const files = Array.from(e.target.files ?? [])
-    const withPreviews = files.map((file) => ({ file, previewUrl: URL.createObjectURL(file) }))
+    const availableSlots = Math.max(0, MAX_PROJECT_IMAGES - existingImages.length - newImages.length)
+    const acceptedFiles = files.slice(0, availableSlots)
+    const withPreviews = acceptedFiles.map((file) => ({ file, previewUrl: URL.createObjectURL(file) }))
     setNewImages((prev) => [...prev, ...withPreviews])
+    setImageError(files.length > availableSlots ? `Projects can have up to ${MAX_PROJECT_IMAGES} photos.` : '')
     e.target.value = ''
   }
 
@@ -65,7 +70,11 @@ export default function PortfolioAdminForm({ project, onSave, onCancel }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (isSaving) return
+    if (isSaving || disabled) return
+    if (totalImages > MAX_PROJECT_IMAGES) {
+      setImageError(`Remove ${totalImages - MAX_PROJECT_IMAGES} photo${totalImages - MAX_PROJECT_IMAGES === 1 ? '' : 's'} before saving.`)
+      return
+    }
     setIsSaving(true)
     try {
       await onSave({
@@ -86,10 +95,10 @@ export default function PortfolioAdminForm({ project, onSave, onCancel }) {
   const totalImages = existingImages.length + newImages.length
 
   return (
-    <form onSubmit={handleSubmit} className="admin-form-card" noValidate aria-busy={isSaving}>
+    <form onSubmit={handleSubmit} className="admin-form-card" noValidate aria-busy={isSaving || disabled}>
       <h2>{project ? 'Edit Project' : 'New Project'}</h2>
 
-      <fieldset className="form-fieldset" disabled={isSaving}>
+      <fieldset className="form-fieldset" disabled={isSaving || disabled}>
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="admin-title">Title *</label>
@@ -153,8 +162,9 @@ export default function PortfolioAdminForm({ project, onSave, onCancel }) {
         <div className="form-group">
           <label>Project Images</label>
           <p className="admin-form-hint">
-            Upload multiple photos — before/after or start-to-finish progress shots work great.
+            Upload up to {MAX_PROJECT_IMAGES} photos. {totalImages} of {MAX_PROJECT_IMAGES} selected.
           </p>
+          {imageError && <p className="admin-image-error" role="alert">{imageError}</p>}
 
           {totalImages > 0 && (
             <div className="image-preview-grid">
@@ -191,6 +201,7 @@ export default function PortfolioAdminForm({ project, onSave, onCancel }) {
             type="button"
             className="btn btn-outline"
             onClick={() => fileInputRef.current?.click()}
+            disabled={totalImages >= MAX_PROJECT_IMAGES}
           >
             Add Images
           </button>
@@ -205,11 +216,11 @@ export default function PortfolioAdminForm({ project, onSave, onCancel }) {
         </div>
 
         <div className="admin-form-actions">
-          <button type="button" className="btn btn-outline" onClick={onCancel} disabled={isSaving}>
+          <button type="button" className="btn btn-outline" onClick={onCancel} disabled={isSaving || disabled}>
             Cancel
           </button>
-          <button type="submit" className="btn btn-primary" disabled={isSaving || totalImages === 0}>
-            {isSaving ? 'Saving…' : 'Save Project'}
+          <button type="submit" className="btn btn-primary" disabled={isSaving || disabled || totalImages === 0 || totalImages > MAX_PROJECT_IMAGES}>
+            {isSaving ? (project ? 'Updating…' : 'Creating…') : 'Save Project'}
           </button>
         </div>
       </fieldset>

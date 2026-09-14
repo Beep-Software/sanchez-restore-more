@@ -1,8 +1,9 @@
 import axios from "axios"
 import { AuthService } from "./auth"
 
-const API_ORIGIN = 'https://api.beepsoftware.com' //import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000"
-const API_PATH = `${API_ORIGIN}/api/sanchezRestore`
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'https://api.beepsoftware.com/api').replace(/\/$/, '')
+const API_ORIGIN = API_BASE_URL.replace(/\/api$/, '')
+const API_PATH = `${API_BASE_URL}/sanchezRestore`
 
 export function normalizeImage(image) {
     const imageUrl = image.url ?? `/api/sanchezRestore/images/${image.id ?? image.image_id}`
@@ -12,6 +13,17 @@ export function normalizeImage(image) {
 export function normalizeProject(project) {
     const images = (project.images ?? []).map(normalizeImage)
     return { ...project, id: String(project.id ?? project.project_id), title: project.title ?? "", category: project.category ?? "Detailing", description: project.description ?? "", images, image: images[0]?.url ?? "" }
+}
+
+async function encodeFile(file) {
+    const buffer = await file.arrayBuffer()
+    let binary = ''
+    new Uint8Array(buffer).forEach((byte) => { binary += String.fromCharCode(byte) })
+    return {
+        fileName: file.name,
+        mimeType: file.type,
+        content: btoa(binary),
+    }
 }
 
 export class PortfolioAdminService {
@@ -49,14 +61,10 @@ export class PortfolioAdminService {
      * @param {{ title: string, category: string, description: string, images: File[] }} project
      */
     async create({ title, category, description, images }) {
-        const formData = new FormData()
-        formData.append("title", title)
-        formData.append("category", category)
-        formData.append("description", description)
-        images.forEach((file) => formData.append("images", file))
+        const encodedImages = await Promise.all(images.map(encodeFile))
 
         try {
-            const response = await this.instance.post("/projects", formData, {
+            const response = await this.instance.post("/projects", { title, category, description, images: encodedImages }, {
                 headers: this._authHeaders(),
             })
             return normalizeProject(response.data.project)
@@ -71,15 +79,10 @@ export class PortfolioAdminService {
      * @param {{ title: string, category: string, description: string, images: File[], removedImageIds?: string[] }} project
      */
     async update(id, { title, category, description, images, removedImageIds = [] }) {
-        const formData = new FormData()
-        formData.append("title", title)
-        formData.append("category", category)
-        formData.append("description", description)
-        images.forEach((file) => formData.append("images", file))
-        removedImageIds.forEach((imageId) => formData.append("removedImageIds", imageId))
+        const encodedImages = await Promise.all(images.map(encodeFile))
 
         try {
-            const response = await this.instance.put(`/projects/${id}`, formData, {
+            const response = await this.instance.put(`/projects/${id}`, { title, category, description, images: encodedImages, removedImageIds }, {
                 headers: this._authHeaders(),
             })
             return normalizeProject(response.data.project)

@@ -1,20 +1,23 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePortfolioProjects } from '../../hooks/usePortfolioProjects'
 import { useCarousel } from '../../hooks/useCarousel'
 
-function PortfolioCardImage({ project }) {
+function PortfolioCardImage({ project, onOpen }) {
   const images = project.images ?? []
   const { current, next, prev, goTo } = useCarousel(images.length, 5000)
   const touchStartX = useRef(null)
+  const didSwipe = useRef(false)
 
   function handleTouchStart(e) {
     touchStartX.current = e.touches[0].clientX
+    didSwipe.current = false
   }
 
   function handleTouchEnd(e) {
     if (touchStartX.current === null) return
     const deltaX = e.changedTouches[0].clientX - touchStartX.current
     if (Math.abs(deltaX) > 40) {
+      didSwipe.current = true
       if (deltaX < 0) next()
       else prev()
     }
@@ -33,6 +36,15 @@ function PortfolioCardImage({ project }) {
           className={`portfolio-card-photo${idx === current ? ' active' : ''}`}
         />
       ))}
+      <button
+        type="button"
+        className="portfolio-card-open"
+        aria-label={`Open photos for ${project.title}`}
+        onClick={() => {
+          if (!didSwipe.current) onOpen()
+          didSwipe.current = false
+        }}
+      />
       {images.length > 1 && (
         <div className="portfolio-card-dots">
           {images.map((_, idx) => (
@@ -41,7 +53,10 @@ function PortfolioCardImage({ project }) {
               type="button"
               className={`portfolio-card-dot${idx === current ? ' active' : ''}`}
               aria-label={`Show photo ${idx + 1} of ${project.title}`}
-              onClick={() => goTo(idx)}
+              onClick={(event) => {
+                event.stopPropagation()
+                goTo(idx)
+              }}
             />
           ))}
         </div>
@@ -50,10 +65,101 @@ function PortfolioCardImage({ project }) {
   )
 }
 
+function ProjectLightbox({ project, onClose }) {
+  const images = project.images ?? []
+  const { current, next, prev, goTo } = useCarousel(images.length, 5000)
+  const touchStartX = useRef(null)
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') onClose()
+      if (event.key === 'ArrowRight') next()
+      if (event.key === 'ArrowLeft') prev()
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [next, onClose, prev])
+
+  const handleTouchStart = (event) => {
+    touchStartX.current = event.touches[0].clientX
+  }
+
+  const handleTouchEnd = (event) => {
+    if (touchStartX.current === null) return
+    const deltaX = event.changedTouches[0].clientX - touchStartX.current
+    if (Math.abs(deltaX) > 40) {
+      if (deltaX < 0) next()
+      else prev()
+    }
+    touchStartX.current = null
+  }
+
+  if (images.length === 0) return null
+
+  return (
+    <div
+      className="portfolio-lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="portfolio-lightbox-title"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose()
+      }}
+    >
+      <div className="portfolio-lightbox-dialog">
+        <div className="portfolio-lightbox-header">
+          <div>
+            <h2 id="portfolio-lightbox-title">{project.title}</h2>
+            <span>{current + 1} of {images.length}</span>
+          </div>
+          <button type="button" className="portfolio-lightbox-close" onClick={onClose} aria-label="Close gallery" autoFocus>
+            ×
+          </button>
+        </div>
+
+        <div className="portfolio-lightbox-stage" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+          <img src={images[current].url} alt={`${project.title}, photo ${current + 1} of ${images.length}`} />
+          {images.length > 1 && (
+            <>
+              <button type="button" className="portfolio-lightbox-arrow previous" onClick={prev} aria-label="Previous photo">‹</button>
+              <button type="button" className="portfolio-lightbox-arrow next" onClick={next} aria-label="Next photo">›</button>
+            </>
+          )}
+        </div>
+
+        {images.length > 1 && (
+          <div className="portfolio-lightbox-thumbnails" aria-label="Choose a photo">
+            {images.map((image, index) => (
+              <button
+                key={image.id ?? index}
+                type="button"
+                className={index === current ? 'active' : ''}
+                onClick={() => goTo(index)}
+                aria-label={`Show photo ${index + 1}`}
+                aria-current={index === current}
+              >
+                <img src={image.url} alt="" />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function PortfolioPage({ navigate }) {
   const { projects: portfolioProjects, isLoading, error } = usePortfolioProjects()
   const categories = ['All', ...new Set(portfolioProjects.map((project) => project.category).filter(Boolean))]
   const [activeCategory, setActiveCategory] = useState('All')
+  const [selectedProject, setSelectedProject] = useState(null)
 
   const filteredProjects =
     activeCategory === 'All'
@@ -92,7 +198,7 @@ export default function PortfolioPage({ navigate }) {
           <div className="portfolio-grid">
             {filteredProjects.map((project) => (
               <div key={project.id} className="portfolio-card">
-                <PortfolioCardImage project={project} />
+                <PortfolioCardImage project={project} onOpen={() => setSelectedProject(project)} />
                 <div className="portfolio-card-content">
                   <div className="portfolio-card-heading">
                     <h3>{project.title}</h3>
@@ -128,6 +234,8 @@ export default function PortfolioPage({ navigate }) {
           </button>
         </div>
       </section>
+
+      {selectedProject && <ProjectLightbox project={selectedProject} onClose={() => setSelectedProject(null)} />}
     </main>
   )
 }

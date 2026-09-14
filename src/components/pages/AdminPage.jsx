@@ -33,7 +33,7 @@ export default function AdminPage({ navigate }) {
   }
 
   const handleSave = async (formValues) => {
-    if (isMutating) return
+    if (isMutating || deletingId) return
     setIsMutating(true)
     try {
       if (editing && editing !== 'new') {
@@ -60,8 +60,8 @@ export default function AdminPage({ navigate }) {
   }
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Delete this project? This cannot be undone.')) return
     if (isMutating || deletingId) return
+    if (!window.confirm('Delete this project? This cannot be undone.')) return
     setDeletingId(id)
     try {
       await portfolioAdminService.remove(id)
@@ -74,8 +74,13 @@ export default function AdminPage({ navigate }) {
     }
   }
 
+  const operationMessage = isMutating
+    ? editing === 'new' ? 'Creating project…' : 'Updating project…'
+    : deletingId ? 'Deleting project…' : ''
+  const isBusy = isMutating || Boolean(deletingId)
+
   return (
-    <main>
+    <main aria-busy={isBusy}>
       <section className="page-hero">
         <span className="section-eyebrow">Admin</span>
         <h1>Manage Portfolio</h1>
@@ -85,10 +90,10 @@ export default function AdminPage({ navigate }) {
       <section className="admin-section">
         <div className="admin-section-inner">
           <div className="admin-toolbar">
-            <button className="btn btn-primary" onClick={() => setEditing('new')} disabled={isLoading || isMutating || Boolean(deletingId)}>
+            <button className="btn btn-primary" onClick={() => setEditing('new')} disabled={isLoading || isBusy}>
               + Add New Project
             </button>
-            <button className="btn btn-outline" onClick={handleLogout} disabled={isLoading || isMutating || Boolean(deletingId)}>
+            <button className="btn btn-outline" onClick={handleLogout} disabled={isLoading || isBusy}>
               Log Out
             </button>
           </div>
@@ -99,6 +104,7 @@ export default function AdminPage({ navigate }) {
               project={editing === 'new' ? null : editing}
               onSave={handleSave}
               onCancel={() => setEditing(null)}
+              disabled={isBusy}
             />
           )}
 
@@ -118,10 +124,10 @@ export default function AdminPage({ navigate }) {
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
                   <div className="admin-card-actions">
-                    <button className="btn btn-outline" onClick={() => setEditing(project)} disabled={isMutating || Boolean(deletingId)}>
+                    <button className="btn btn-outline" onClick={() => setEditing(project)} disabled={isBusy}>
                       Edit
                     </button>
-                    <button className="btn btn-outline admin-card-delete" onClick={() => handleDelete(project.id)} disabled={isMutating || Boolean(deletingId)}>
+                    <button className="btn btn-outline admin-card-delete" onClick={() => handleDelete(project.id)} disabled={isBusy}>
                       {deletingId === project.id ? 'Deleting…' : 'Delete'}
                     </button>
                   </div>
@@ -131,6 +137,16 @@ export default function AdminPage({ navigate }) {
           </div>}
         </div>
       </section>
+
+      {operationMessage && (
+        <div className="admin-operation-overlay" role="status" aria-live="polite">
+          <div className="admin-operation-status">
+            <span className="admin-operation-spinner" aria-hidden="true" />
+            <strong>{operationMessage}</strong>
+            <span>Please wait. Do not close this page.</span>
+          </div>
+        </div>
+      )}
     </main>
   )
 }

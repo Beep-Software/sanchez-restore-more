@@ -33,7 +33,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <span>© {year} Sanchez Restore &amp; More. All rights reserved.</span>
-        <Link className="footer-admin-link" to="/admin-login">
+        <Link className="footer-admin-link" to="/admin">
           Staff Login
         </Link>
       </div>

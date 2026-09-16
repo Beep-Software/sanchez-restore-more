@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { usePortfolioProjects } from '../../hooks/usePortfolioProjects'
 import { useCarousel } from '../../hooks/useCarousel'
+import { useSeoMeta } from '../../hooks/useSeoMeta'
 
 function PortfolioCardImage({ project, onOpen }) {
   const images = project.images ?? []
@@ -67,7 +69,8 @@ function PortfolioCardImage({ project, onOpen }) {
 
 function ProjectLightbox({ project, onClose }) {
   const images = project.images ?? []
-  const { current, next, prev, goTo } = useCarousel(images.length, 5000)
+  // Auto-rotate disabled — the user drives image changes here via arrows/swipe/keys
+  const { current, next, prev, goTo } = useCarousel(images.length, 0)
   const touchStartX = useRef(null)
 
   useEffect(() => {
@@ -155,11 +158,18 @@ function ProjectLightbox({ project, onClose }) {
   )
 }
 
-export default function PortfolioPage({ navigate }) {
+export default function PortfolioPage() {
+  const navigate = useNavigate()
   const { projects: portfolioProjects, isLoading, error } = usePortfolioProjects()
   const categories = ['All', ...new Set(portfolioProjects.map((project) => project.category).filter(Boolean))]
   const [activeCategory, setActiveCategory] = useState('All')
   const [selectedProject, setSelectedProject] = useState(null)
+
+  useSeoMeta({
+    title: 'Completed Projects & Portfolio',
+    description: 'Browse completed auto detailing, paint correction, and ceramic coating projects by Sanchez Restore & More in Southern Indiana and Louisville, KY.',
+    path: '/portfolio',
+  })
 
   const filteredProjects =
     activeCategory === 'All'
@@ -229,7 +239,7 @@ export default function PortfolioPage({ navigate }) {
             See the difference professional care can make. Contact us for a free consultation
             or estimate.
           </p>
-          <button className="btn btn-primary" onClick={() => navigate('estimate')}>
+          <button className="btn btn-primary" onClick={() => navigate('/estimate')}>
             Request an Estimate
           </button>
         </div>

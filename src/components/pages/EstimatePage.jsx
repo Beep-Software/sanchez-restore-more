@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { CheckCircleIcon, ErrorCircleIcon } from '../Icons'
 import { EmailService } from '../../services/email'
+import { useSeoMeta } from '../../hooks/useSeoMeta'
 
 const ESTIMATE_EMAIL = 'sanchezrestoremore@gmail.com'
 // const ESTIMATE_EMAIL = 'bowen61496@gmail.com'
@@ -24,8 +26,16 @@ const INITIAL_FORM = {
   message: '',
 }
 
-export default function EstimatePage({ initialService }) {
+export default function EstimatePage() {
+  const [searchParams] = useSearchParams()
+  const initialService = searchParams.get('service')
   const [form, setForm] = useState({ ...INITIAL_FORM, service: initialService ?? '' })
+
+  useSeoMeta({
+    title: 'Get a Free Estimate',
+    description: 'Request a free, no-obligation estimate for auto detailing, paint correction, or ceramic coating in Southern Indiana and the Louisville, KY area.',
+    path: '/estimate',
+  })
   const [isServiceOpen, setIsServiceOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [submissionError, setSubmissionError] = useState(false)
@@ -56,6 +66,8 @@ export default function EstimatePage({ initialService }) {
     const { name, value } = e.target
     setForm((prev) => ({ ...prev, [name]: value }))
   }
+
+  const isFormComplete = Object.values(form).every((value) => value.trim() !== '')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -191,7 +203,7 @@ export default function EstimatePage({ initialService }) {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="phone">Phone Number</label>
+                  <label htmlFor="phone">Phone Number *</label>
                   <input
                     id="phone"
                     name="phone"
@@ -199,6 +211,7 @@ export default function EstimatePage({ initialService }) {
                     placeholder="(555) 000-0000"
                     value={form.phone}
                     onChange={handleChange}
+                    required
                     autoComplete="tel"
                   />
                 </div>
@@ -223,7 +236,7 @@ export default function EstimatePage({ initialService }) {
               {/* Vehicle */}
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="year">Vehicle Year</label>
+                  <label htmlFor="year">Vehicle Year *</label>
                   <input
                     id="year"
                     name="year"
@@ -231,11 +244,12 @@ export default function EstimatePage({ initialService }) {
                     placeholder="2019"
                     value={form.year}
                     onChange={handleChange}
+                    required
                     maxLength={4}
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="make">Make</label>
+                  <label htmlFor="make">Make *</label>
                   <input
                     id="make"
                     name="make"
@@ -243,12 +257,13 @@ export default function EstimatePage({ initialService }) {
                     placeholder="Toyota"
                     value={form.make}
                     onChange={handleChange}
+                    required
                   />
                 </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="model">Model</label>
+                <label htmlFor="model">Model *</label>
                 <input
                   id="model"
                   name="model"
@@ -256,11 +271,12 @@ export default function EstimatePage({ initialService }) {
                   placeholder="Camry"
                   value={form.model}
                   onChange={handleChange}
+                  required
                 />
               </div>
 
               <div className="form-group">
-                <label id="service-label">Service Needed</label>
+                <label id="service-label">Service Needed *</label>
                 <div className="form-dropdown" ref={serviceRef}>
                   <button
                     type="button"
@@ -298,24 +314,27 @@ export default function EstimatePage({ initialService }) {
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">Additional Details</label>
+                <label htmlFor="message">Additional Details *</label>
                 <textarea
                   id="message"
                   name="message"
                   placeholder="Describe the damage, service requested, or any other details that might be helpful…"
                   value={form.message}
                   onChange={handleChange}
+                  required
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary form-submit">
+              <button type="submit" className="btn btn-primary form-submit" disabled={isSubmitting || !isFormComplete}>
                 {isSubmitting ? 'Sending Request...' : 'Send Estimate Request'}
               </button>
 
               <p className="form-note">
                 {isSubmitting
                   ? 'Submitting your estimate request. Please wait for confirmation.'
-                  : 'Your estimate request will be sent directly to our team.'}
+                  : isFormComplete
+                    ? 'Your estimate request will be sent directly to our team.'
+                    : 'Please fill in all fields to send your request.'}
               </p>
               </fieldset>
             </form>

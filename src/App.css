@@ -67,7 +67,9 @@
 .logo-icon {
   display: block;
   flex-shrink: 0;
-  color: var(--text);
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
 
 .logo-text {
@@ -285,7 +287,9 @@
 
 .footer-brand-icon {
   flex-shrink: 0;
-  color: rgba(255,255,255,0.7);
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }
 
 .footer-brand p {
@@ -316,23 +320,30 @@
   margin: 32px auto 0;
   padding-top: 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.4);
 }
 
 .footer-admin-link {
-  background: none;
-  border: 0;
-  padding: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .footer-admin-link:hover {
-  color: rgba(255, 255, 255, 0.7);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 /* ── Home – Hero ────────────────────────────────────── */
@@ -1746,6 +1757,11 @@ button:disabled {
   .footer-inner {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   .form-row {

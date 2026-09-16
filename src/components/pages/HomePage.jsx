@@ -1,10 +1,19 @@
+import { useNavigate } from 'react-router-dom'
 import { PaintBrushIcon, SparklesIcon } from '../Icons'
 import { useCarousel } from '../../hooks/useCarousel'
 import { usePortfolioProjects } from '../../hooks/usePortfolioProjects'
+import { useSeoMeta } from '../../hooks/useSeoMeta'
 
-export default function HomePage({ navigate }) {
+export default function HomePage() {
+  const navigate = useNavigate()
   const { projects: portfolioProjects, error } = usePortfolioProjects()
   const { current } = useCarousel(portfolioProjects.length, 5000)
+
+  useSeoMeta({
+    title: 'Auto Detailing & Paint Correction in Southern Indiana & Louisville, KY',
+    description: 'Sanchez Restore & More provides professional auto detailing, paint correction, and ceramic coating for Southern Indiana and the Louisville, KY area. Family-run, honest work at fair prices.',
+    path: '/',
+  })
 
   return (
     <main>
@@ -29,10 +38,10 @@ export default function HomePage({ navigate }) {
               for drivers across Southern Indiana and the Louisville, KY area.
             </p>
             <div className="hero-glass-buttons">
-              <button className="btn btn-primary" onClick={() => navigate('estimate')}>
+              <button className="btn btn-primary" onClick={() => navigate('/estimate')}>
                 Get a Free Estimate
               </button>
-              <button className="btn btn-secondary" onClick={() => navigate('services')}>
+              <button className="btn btn-secondary" onClick={() => navigate('/services')}>
                 Our Services
               </button>
             </div>

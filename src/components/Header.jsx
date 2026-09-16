@@ -1,46 +1,47 @@
 import { useState } from 'react'
-import { TruckWrenchIcon } from './Icons'
+import { Link, useLocation } from 'react-router-dom'
+import logoIcon from '../assets/logo-icon.png'
 
-export default function Header({ currentPage, navigate }) {
+export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { pathname } = useLocation()
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'services', label: 'Services' },
-    { id: 'portfolio', label: 'Portfolio' },
+    { id: '/', label: 'Home' },
+    { id: '/services', label: 'Services' },
+    { id: '/portfolio', label: 'Portfolio' },
   ]
 
-  const handleNavigate = (id) => {
-    setMenuOpen(false)
-    navigate(id)
-  }
+  const closeMenu = () => setMenuOpen(false)
 
   return (
     <header className="header">
       <div className="header-inner">
-        <button className="logo-btn" onClick={() => handleNavigate('home')}>
-          <TruckWrenchIcon size={30} className="logo-icon" />
+        <Link className="logo-btn" to="/" onClick={closeMenu}>
+          <img src={logoIcon} alt="" width={36} height={36} className="logo-icon" />
           <span className="logo-text">Sanchez Restore &amp; More</span>
-        </button>
+        </Link>
 
         <nav className="nav" aria-label="Main navigation">
           {navItems.map((item) => (
-            <button
+            <Link
               key={item.id}
-              className={`nav-link${currentPage === item.id ? ' active' : ''}`}
-              onClick={() => handleNavigate(item.id)}
-              aria-current={currentPage === item.id ? 'page' : undefined}
+              className={`nav-link${pathname === item.id ? ' active' : ''}`}
+              to={item.id}
+              onClick={closeMenu}
+              aria-current={pathname === item.id ? 'page' : undefined}
             >
               {item.label}
-            </button>
+            </Link>
           ))}
-          <button
-            className={`nav-link nav-cta${currentPage === 'estimate' ? ' active' : ''}`}
-            onClick={() => handleNavigate('estimate')}
-            aria-current={currentPage === 'estimate' ? 'page' : undefined}
+          <Link
+            className={`nav-link nav-cta${pathname === '/estimate' ? ' active' : ''}`}
+            to="/estimate"
+            onClick={closeMenu}
+            aria-current={pathname === '/estimate' ? 'page' : undefined}
           >
             Get an Estimate
-          </button>
+          </Link>
         </nav>
 
         <button
@@ -59,22 +60,24 @@ export default function Header({ currentPage, navigate }) {
       {menuOpen && (
         <nav className="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
           {navItems.map((item) => (
-            <button
+            <Link
               key={item.id}
-              className={`mobile-link${currentPage === item.id ? ' active' : ''}`}
-              onClick={() => handleNavigate(item.id)}
-              aria-current={currentPage === item.id ? 'page' : undefined}
+              className={`mobile-link${pathname === item.id ? ' active' : ''}`}
+              to={item.id}
+              onClick={closeMenu}
+              aria-current={pathname === item.id ? 'page' : undefined}
             >
               {item.label}
-            </button>
+            </Link>
           ))}
-          <button
-            className={`mobile-link mobile-cta${currentPage === 'estimate' ? ' active' : ''}`}
-            onClick={() => handleNavigate('estimate')}
-            aria-current={currentPage === 'estimate' ? 'page' : undefined}
+          <Link
+            className={`mobile-link mobile-cta${pathname === '/estimate' ? ' active' : ''}`}
+            to="/estimate"
+            onClick={closeMenu}
+            aria-current={pathname === '/estimate' ? 'page' : undefined}
           >
             Get an Estimate
-          </button>
+          </Link>
         </nav>
       )}
     </header>

@@ -1,11 +1,21 @@
+import { useNavigate } from 'react-router-dom'
 import { PaintBrushIcon, SparklesIcon } from '../Icons'
+import { useSeoMeta } from '../../hooks/useSeoMeta'
 
 const SERVICE_ICONS = {
   paint: PaintBrushIcon,
   detail: SparklesIcon,
 }
 
-export default function ServicesPage({ navigate }) {
+export default function ServicesPage() {
+  const navigate = useNavigate()
+
+  useSeoMeta({
+    title: 'Auto Detailing & Paint Correction Services',
+    description: 'From paint correction to premium detailing and ceramic coating, our team delivers honest work at fair prices for Southern Indiana and the Louisville, KY area.',
+    path: '/services',
+  })
+
   const services = [
     {
       icon: 'detail',
@@ -17,7 +27,6 @@ export default function ServicesPage({ navigate }) {
         'Full interior deep clean',
         'Exterior decontamination wash',
         'Machine polish and paint correction',
-        'Ceramic coating application',
         'Leather conditioning and treatment',
         'Engine bay cleaning',
       ],
@@ -69,7 +78,7 @@ export default function ServicesPage({ navigate }) {
               <div className="service-row-action">
                 <button
                   className="btn btn-outline"
-                  onClick={() => navigate('estimate', { service: svc.estimateValue })}
+                  onClick={() => navigate(`/estimate?service=${encodeURIComponent(svc.estimateValue)}`)}
                 >
                   Get Estimate
                 </button>

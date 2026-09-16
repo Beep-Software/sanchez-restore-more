@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AuthService } from '../../services/auth'
 import { PortfolioAdminService } from '../../services/portfolioAdmin'
 import PortfolioAdminForm from '../PortfolioAdminForm'
 import { notificationService } from '../../services/notifications'
+import { useSeoMeta } from '../../hooks/useSeoMeta'
 
-export default function AdminPage({ navigate }) {
+export default function AdminPage() {
+  const navigate = useNavigate()
   const [projects, setProjects] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
@@ -12,24 +15,42 @@ export default function AdminPage({ navigate }) {
   const [isMutating, setIsMutating] = useState(false)
   const [deletingId, setDeletingId] = useState(null)
 
+  useSeoMeta({
+    title: 'Manage Portfolio',
+    description: 'Admin dashboard for Sanchez Restore & More.',
+    path: '/admin',
+    noindex: true,
+  })
+
   const authService = new AuthService()
   const portfolioAdminService = new PortfolioAdminService()
 
   useEffect(() => {
-    if (!authService.isAuthenticated()) navigate('admin-login')
-    portfolioAdminService.list()
-      .then(setProjects)
-      .catch(() => {
-        setError('Projects could not be loaded.')
-        notificationService.error('Projects could not be loaded.')
-      })
-      .finally(() => setIsLoading(false))
+    let active = true
+
+    authService.ensureValidToken().then((token) => {
+      if (!active) return
+      if (!token) {
+        navigate('/admin-login')
+        return
+      }
+      portfolioAdminService.list()
+        .then((result) => { if (active) setProjects(result) })
+        .catch(() => {
+          if (!active) return
+          setError('Projects could not be loaded.')
+          notificationService.error('Projects could not be loaded.')
+        })
+        .finally(() => { if (active) setIsLoading(false) })
+    })
+
+    return () => { active = false }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleLogout = () => {
     authService.logout()
-    navigate('admin-login')
+    navigate('/admin-login')
   }
 
   const handleSave = async (formValues) => {

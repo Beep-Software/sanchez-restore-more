@@ -8,6 +8,14 @@
     <!-- Warm up the connection to the portfolio API early so the first hero photo/data request doesn't pay the DNS+TLS cost -->
     <link rel="preconnect" href="https://api.beepsoftware.com" crossorigin />
     <link rel="dns-prefetch" href="https://api.beepsoftware.com" />
+    <!-- Kick off the hero/portfolio data fetch immediately instead of waiting for React to mount and run its effect -->
+    <link rel="preload" href="https://api.beepsoftware.com/api/sanchezRestore/projects" as="fetch" crossorigin />
+
+    <!-- Fonts: preconnect + a real <link> (instead of a CSS @import) so the font request starts
+         in parallel with the HTML parse rather than after the stylesheet has been downloaded and parsed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" />
 
     <!-- Primary SEO -->
     <title>Auto Detailing &amp; Paint Correction in Southern Indiana &amp; Louisville, KY | Sanchez Restore &amp; More</title>
@@ -20,10 +28,15 @@
     <!-- Open Graph (Facebook / social) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://sanchezdetail.com/" />
+    <meta property="og:site_name" content="Sanchez Restore & More" />
     <meta property="og:title" content="Auto Detailing & Paint Correction in Southern Indiana & Louisville, KY | Sanchez Restore & More" />
     <meta property="og:description" content="Professional auto detailing, paint correction, and ceramic coating for Southern Indiana and the Louisville, KY area. Family-run, honest work at fair prices." />
-    <!-- Replace og-image.svg with a real 1200x630 JPG/PNG named og-image.jpg when you have a photo -->
-    <meta property="og:image" content="https://sanchezdetail.com/og-image.svg" />
+    <meta property="og:image" content="https://sanchezdetail.com/og-image.jpg" />
+    <meta property="og:image:secure_url" content="https://sanchezdetail.com/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Sanchez Restore & More — Auto Detailing & Paint Correction in Southern Indiana & Louisville, KY" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
@@ -31,7 +44,8 @@
     <meta name="twitter:url" content="https://sanchezdetail.com/" />
     <meta name="twitter:title" content="Auto Detailing & Paint Correction in Southern Indiana & Louisville, KY | Sanchez Restore & More" />
     <meta name="twitter:description" content="Professional auto detailing, paint correction, and ceramic coating for Southern Indiana and the Louisville, KY area." />
-    <meta name="twitter:image" content="https://sanchezdetail.com/og-image.svg" />
+    <meta name="twitter:image" content="https://sanchezdetail.com/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Sanchez Restore & More — Auto Detailing & Paint Correction in Southern Indiana & Louisville, KY" />
 
     <!-- Local business structured data (JSON-LD) -->
     <script type="application/ld+json">
@@ -39,7 +53,7 @@
       "@context": "https://schema.org",
       "@type": "AutoRepair",
       "name": "Sanchez Restore & More",
-      "image": "https://sanchezdetail.com/og-image.svg",
+      "image": "https://sanchezdetail.com/og-image.jpg",
       "url": "https://sanchezdetail.com/",
       "telephone": "+1-812-267-0274",
       "email": "sanchezrestoremore@gmail.com",

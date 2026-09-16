@@ -35,15 +35,15 @@ export class PortfolioAdminService {
         this.auth = new AuthService()
     }
 
-    _authHeaders() {
-        const token = this.auth.getToken()
+    async _authHeaders() {
+        const token = await this.auth.ensureValidToken()
         return token ? { Authorization: `Bearer ${token}` } : {}
     }
 
     async list() {
         try {
             const response = await this.instance.get("/projects", {
-                headers: this._authHeaders(),
+                headers: await this._authHeaders(),
             })
             return (response.data.projects ?? []).map(normalizeProject)
         } catch (error) {
@@ -65,7 +65,7 @@ export class PortfolioAdminService {
 
         try {
             const response = await this.instance.post("/projects", { title, category, description, images: encodedImages }, {
-                headers: this._authHeaders(),
+                headers: await this._authHeaders(),
             })
             return normalizeProject(response.data.project)
         } catch (error) {
@@ -83,7 +83,7 @@ export class PortfolioAdminService {
 
         try {
             const response = await this.instance.put(`/projects/${id}`, { title, category, description, images: encodedImages, removedImageIds }, {
-                headers: this._authHeaders(),
+                headers: await this._authHeaders(),
             })
             return normalizeProject(response.data.project)
         } catch (error) {
@@ -95,7 +95,7 @@ export class PortfolioAdminService {
     async remove(id) {
         try {
             const response = await this.instance.delete(`/projects/${id}`, {
-                headers: this._authHeaders(),
+                headers: await this._authHeaders(),
             })
             return response.data
         } catch (error) {

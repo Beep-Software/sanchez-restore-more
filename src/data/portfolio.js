@@ -1,1 +1,1 @@
-export const portfolioCategories = ['All', 'Paint Correction', 'Detailing', 'Maintenance']
+export const portfolioCategories = ['All', 'Paint Correction', 'Detailing', 'Restoration', 'Maintenance']

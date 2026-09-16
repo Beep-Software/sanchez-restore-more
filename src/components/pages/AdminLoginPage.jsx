@@ -1,12 +1,22 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ErrorCircleIcon } from '../Icons'
 import { AuthService } from '../../services/auth'
 import { notificationService } from '../../services/notifications'
+import { useSeoMeta } from '../../hooks/useSeoMeta'
 
-export default function AdminLoginPage({ navigate }) {
+export default function AdminLoginPage() {
+  const navigate = useNavigate()
   const [form, setForm] = useState({ username: '', password: '' })
   const [error, setError] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  useSeoMeta({
+    title: 'Admin Login',
+    description: 'Staff sign-in for Sanchez Restore & More.',
+    path: '/admin-login',
+    noindex: true,
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -24,7 +34,7 @@ export default function AdminLoginPage({ navigate }) {
     try {
       await authService.login(form)
       notificationService.success('Signed in successfully.')
-      navigate('admin')
+      navigate('/admin')
     } catch {
       setError(true)
       notificationService.error('Sign in failed. Check your credentials and try again.')

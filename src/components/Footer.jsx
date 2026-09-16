@@ -1,13 +1,14 @@
-import { TruckWrenchIcon } from './Icons'
+import { Link } from 'react-router-dom'
+import logoIcon from '../assets/logo-icon.png'
 
-export default function Footer({ navigate }) {
+export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
     <footer className="footer">
       <div className="footer-inner">
         <div className="footer-brand">
-          <h3 className="footer-brand-name"><TruckWrenchIcon size={18} className="footer-brand-icon" /> Sanchez Restore &amp; More</h3>
+          <h3 className="footer-brand-name"><img src={logoIcon} alt="" width={22} height={22} className="footer-brand-icon" /> Sanchez Restore &amp; More</h3>
           <p>
             Locally owned automotive care. Detailing and paint correction — done with pride.
           </p>
@@ -30,13 +31,12 @@ export default function Footer({ navigate }) {
         </div>
       </div>
 
-      <p className="footer-bottom">
-        © {year} Sanchez Restore &amp; More. All rights reserved.
-        {' · '}
-        <button type="button" className="footer-admin-link" onClick={() => navigate?.('admin-login')}>
+      <div className="footer-bottom">
+        <span>© {year} Sanchez Restore &amp; More. All rights reserved.</span>
+        <Link className="footer-admin-link" to="/admin-login">
           Staff Login
-        </button>
-      </p>
+        </Link>
+      </div>
     </footer>
   )
 }

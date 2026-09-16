@@ -16,9 +16,9 @@ export function useCarousel(count, interval = 5000) {
     setTimerReset((reset) => reset + 1)
   }
 
-  // Auto-rotate effect
+  // Auto-rotate effect (disabled when interval is falsy/0)
   useEffect(() => {
-    if (count <= 1) return
+    if (count <= 1 || !interval) return
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % count)
     }, interval)

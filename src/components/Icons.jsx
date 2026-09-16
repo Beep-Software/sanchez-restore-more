@@ -61,32 +61,3 @@ export function ErrorCircleIcon({ size = 24, className = '' }) {
     className,
   )
 }
-
-/** Car — automotive restoration logo */
-export function TruckWrenchIcon({ size = 24, className = '' }) {
-  return svg(
-    <>
-      {/* Car body */}
-      <path d="M4 11h16v4H4z" strokeWidth="1.5" fill="none" />
-      {/* Car roof */}
-      <path d="M7 11L8 7h8l1 4" strokeWidth="1.5" fill="none" />
-      {/* Front window */}
-      <path d="M8 8v2.5" strokeWidth="1" opacity="0.5" />
-      {/* Rear window */}
-      <path d="M14 8v2.5" strokeWidth="1" opacity="0.5" />
-      {/* Front bumper */}
-      <line x1="3.5" y1="15" x2="4.5" y2="15" strokeWidth="1.5" />
-      {/* Rear bumper */}
-      <line x1="19.5" y1="15" x2="20.5" y2="15" strokeWidth="1.5" />
-      {/* Front wheel */}
-      <circle cx="6" cy="16" r="1.3" strokeWidth="1.5" />
-      {/* Rear wheel */}
-      <circle cx="18" cy="16" r="1.3" strokeWidth="1.5" />
-      {/* Wheel hubs */}
-      <circle cx="6" cy="16" r="0.4" fill="currentColor" />
-      <circle cx="18" cy="16" r="0.4" fill="currentColor" />
-    </>,
-    size,
-    className,
-  )
-}

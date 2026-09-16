@@ -1,49 +1,51 @@
-import { useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './components/pages/HomePage'
-import ServicesPage from './components/pages/ServicesPage'
-import PortfolioPage from './components/pages/PortfolioPage'
-import EstimatePage from './components/pages/EstimatePage'
-import AdminLoginPage from './components/pages/AdminLoginPage'
-import AdminPage from './components/pages/AdminPage'
 import NotificationManager from './components/NotificationManager'
 import './App.css'
 
-const PAGES = {
-  home: HomePage,
-  services: ServicesPage,
-  portfolio: PortfolioPage,
-  estimate: EstimatePage,
-  'admin-login': AdminLoginPage,
-  admin: AdminPage,
-}
+// Code-split everything but the homepage so the first visit only downloads what it
+// needs to render — admin/estimate/portfolio pages load on demand.
+const ServicesPage = lazy(() => import('./components/pages/ServicesPage'))
+const PortfolioPage = lazy(() => import('./components/pages/PortfolioPage'))
+const EstimatePage = lazy(() => import('./components/pages/EstimatePage'))
+const AdminLoginPage = lazy(() => import('./components/pages/AdminLoginPage'))
+const AdminPage = lazy(() => import('./components/pages/AdminPage'))
+const NotFoundPage = lazy(() => import('./components/pages/NotFoundPage'))
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home')
-  const [displayPage, setDisplayPage] = useState('home')
+  const location = useLocation()
+  const [displayLocation, setDisplayLocation] = useState(location)
   const [animState, setAnimState] = useState('idle') // 'idle' | 'out' | 'in'
-  const [estimateService, setEstimateService] = useState(null)
 
-  const navigate = (to, options = {}) => {
-    if (to === currentPage || animState !== 'idle') return
-    setEstimateService(to === 'estimate' ? (options.service ?? null) : null)
-    setCurrentPage(to)
+  // Adjust state during render (not in an effect) when the route changes — this is the
+  // pattern React recommends for deriving state from a prop/value change.
+  if (location.pathname !== displayLocation.pathname && animState === 'idle') {
     setAnimState('out')
-    setTimeout(() => {
-      setDisplayPage(to)
-      window.scrollTo(0, 0)
-      setAnimState('in')
-      setTimeout(() => setAnimState('idle'), 400)
-    }, 280)
   }
 
-  const PageComponent = PAGES[displayPage] ?? HomePage
+  useEffect(() => {
+    if (animState !== 'out') return undefined
+    const outTimer = setTimeout(() => {
+      setDisplayLocation(location)
+      window.scrollTo(0, 0)
+      setAnimState('in')
+    }, 280)
+    return () => clearTimeout(outTimer)
+  }, [animState, location])
+
+  useEffect(() => {
+    if (animState !== 'in') return undefined
+    const inTimer = setTimeout(() => setAnimState('idle'), 400)
+    return () => clearTimeout(inTimer)
+  }, [animState])
 
   return (
     <div className="app">
       <NotificationManager />
-      <Header currentPage={currentPage} navigate={navigate} />
+      <Header />
       <div
         className={[
           'page-body',
@@ -53,8 +55,18 @@ export default function App() {
           .filter(Boolean)
           .join(' ')}
       >
-        <PageComponent navigate={navigate} initialService={estimateService} />
-        <Footer navigate={navigate} />
+        <Suspense fallback={null}>
+          <Routes location={displayLocation}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/portfolio" element={<PortfolioPage />} />
+            <Route path="/estimate" element={<EstimatePage />} />
+            <Route path="/admin-login" element={<AdminLoginPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+        <Footer />
       </div>
     </div>
   )
